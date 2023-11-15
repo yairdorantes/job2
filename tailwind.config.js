@@ -3,9 +3,14 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      fontFamily:{
-        chrismas:['Mountains of Christmas', 'serif']
-      }
+      fontFamily: {
+        chrismas: ["Mountains of Christmas", "serif"],
+        Titles: ["Fjalla One", "sans-serif"],
+        Paragraph: ["Roboto", "sans-serif"],
+        Classic: ["Christmas Classica", "sans-serif"],
+        cursive: ["Dancing Script", "cursive"],
+        cinzel: ["Cinzel Decorative", "serif"],
+      },
     },
   },
   plugins: [require("daisyui")],

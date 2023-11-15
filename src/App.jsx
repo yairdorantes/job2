@@ -13,11 +13,6 @@ import cotton2 from "./media/lol.jpg";
 function App() {
   const images = [cotton, cotton2];
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
   const getColaborators = () => {
     axios
       .get(`${api}/colabs`)
@@ -47,16 +42,19 @@ function App() {
         backgroundImage: `url(${bg})`,
       }}
     >
-      <motion.div className="progress-bar" style={{ scaleX }} />
+    <motion.div
+        className="progress-bar"
+        style={{ scaleX: scrollYProgress }}
+      />
 
-      <div className="mx-4">
         <Landing />
+      <div className="mx-4">
         <InvText />
         <Sec3 />
         <Form />
         <Snowfall
           // images={images}
-          color="#818dae7b"
+          color="#dadee7fd"
           speed={[0.5, 0.5]}
           radius={[2, 4]}
           snowflakeCount={100}

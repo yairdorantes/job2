@@ -13,16 +13,40 @@ html {
 }
 body {
   /* margin: 10px; */
+  overflow-x: hidden;
+  --red: #235e6fc0;
 }
+.custom-shape-divider-bottom-1700083642 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-bottom-1700083642 svg {
+  position: relative;
+  display: block;
+  width: calc(105% + 1.3px);
+  height: 73px;
+}
+
+.custom-shape-divider-bottom-1700083642 .shape-fill {
+  fill: #ffffff;
+}
+
 
 .progress-bar {
   position: fixed;
   top: 0;
   left: 0;
+  border-radius: 10px;
   right: 0;
   height: 10px;
   background: var(--red);
   transform-origin: 0%;
+  z-index: 100;
 }
 
 .btn-chrismas {
@@ -37,7 +61,7 @@ body {
   line-height: 20px;
   text-decoration: none;
   color: #fff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
+  text-shadow: 0 1px 2px rgba(223, 18, 18, 0.75);
   background: #5e0d0c;
   outline: none;
   border-radius: 15px;
@@ -184,7 +208,7 @@ body {
 
 /* Add Christmas decorations */
 ::-webkit-scrollbar-button {
-  background-image: url("snowflake.png"); /* Add a snowflake image as a button */
+  background-image: url("./media/copo.png"); /* Add a snowflake image as a button */
   background-size: cover;
 }
 
@@ -199,7 +223,7 @@ body {
 
 /* Add a Christmas tree to the track */
 ::-webkit-scrollbar-track-piece:start {
-  background-image: url("christmas_tree.png"); /* Add a Christmas tree image */
+  background-image: url("./media/tree2.png"); /* Add a Christmas tree image */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

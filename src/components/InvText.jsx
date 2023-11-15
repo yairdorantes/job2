@@ -1,4 +1,4 @@
-import people from "../media/people.jpeg"
+import people from "../media/meet.jpg"
 const InvText = () => {
   return (
     <section className="mt-20">
@@ -24,7 +24,7 @@ const InvText = () => {
         </p>
       </div>
       <div>
-        <img src={people} className= "h-auto w-72 rounded-md" alt="" />
+        <img src={people} className= "w-80  rounded-md" alt="" />
       </div>
 
       </div>

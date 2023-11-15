@@ -1,14 +1,14 @@
 import cottonLogo from "../media/cotton.svg";
-import bg from "../media/bg2.jpg"
+import bg from "../media/bglex.jpg"
 import lerma from "../media/AmericanLogo-Lerma.svg"
 import santiago from "../media/AmericanLogo-Santiago.svg"
 import santacruz from "../media/AmericanLogo-SantaCruz.svg"
+import title from "../media/title.png"
 import { useEffect, useState } from "react";
 const Landing = () => {
 const [imagePath, setImagePath] = useState(lerma)
   useEffect(() => {
     let path = window.location.href
-    // path = path.split("/")
     console.log(path);
     if(path.includes("lerma")){
       setImagePath(lerma)
@@ -34,10 +34,8 @@ setImagePath(santacruz)
            backgroundImage: `url(${bg})`,
          }}
       className="min-h-screen w-screen bg-fixed relative bg-cover bg-center flex flex-col items-center justify-center">
-        <div className="font-bold text-center font-chrismas pt-20  text-yellow-300 capitalize">
-          <div className="text-[70px]">fiesta de</div>
-          <div className="text-[80px]">fin de año</div>
-
+        <div className=" mt-24">
+       <img src={title} className="w-[450px]" alt="" />
         </div>
         <div className="mt-10 text-center">
           <a href="#form-attendance">

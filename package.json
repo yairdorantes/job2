@@ -21,6 +21,7 @@
     "react-hot-toast": "^2.4.1",
     "react-qr-reader": "^3.0.0-beta-1",
     "react-qr-scanner": "^1.0.0-alpha.11",
+    "react-router-dom": "^6.19.0",
     "react-snowfall": "^1.2.1",
     "sweetalert2": "^11.9.0",
     "sweetalert2-react-content": "^5.0.7"
@@ -30,7 +31,7 @@
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
     "autoprefixer": "^10.4.16",
-    "daisyui": "^4.0.4",
+    "daisyui": "^4.1.0",
     "eslint": "^8.45.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",

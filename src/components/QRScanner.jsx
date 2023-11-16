@@ -1,55 +1,47 @@
-// file = Html5QrcodePlugin.jsx
-import { Html5QrcodeScanner } from "html5-qrcode";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import QrScanner from "qr-scanner";
 
-const qrcodeRegionId = "html5qr-code-full-region";
-
-// Creates the configuration object for Html5QrcodeScanner.
-const createConfig = (props) => {
-  let config = {};
-  if (props.fps) {
-    config.fps = props.fps;
-  }
-  if (props.qrbox) {
-    config.qrbox = props.qrbox;
-  }
-  if (props.aspectRatio) {
-    config.aspectRatio = props.aspectRatio;
-  }
-  if (props.disableFlip !== undefined) {
-    config.disableFlip = props.disableFlip;
-  }
-  return config;
-};
-
-const QRScanner = (props) => {
+const QRScanner = () => {
+  const [code, setCode] = useState("");
   useEffect(() => {
-    // when component mounts
-    const config = createConfig(props);
-    const verbose = props.verbose === true;
-    // Suceess callback is required.
-    if (!props.qrCodeSuccessCallback) {
-      throw "qrCodeSuccessCallback is required callback.";
-    }
-    const html5QrcodeScanner = new Html5QrcodeScanner(
-      qrcodeRegionId,
-      config,
-      verbose
-    );
-    html5QrcodeScanner.render(
-      props.qrCodeSuccessCallback,
-      props.qrCodeErrorCallback
-    );
+    const videoElem = document.createElement("video");
+    document.body.appendChild(videoElem);
 
-    // cleanup function when component will unmount
+    const qrScanner = new QrScanner(
+      videoElem,
+
+      (result) => {
+        // alert(JSON.stringify(result));
+        console.log("decoded qr code:", result);
+        const employeeData = result.data.split("|");
+        console.log(employeeData);
+        setCode(employeeData);
+      },
+      { highlightScanRegion: true }
+    );
+    qrScanner.start();
     return () => {
-      html5QrcodeScanner.clear().catch((error) => {
-        console.error("Failed to clear html5QrcodeScanner. ", error);
-      });
+      qrScanner.stop();
+      document.body.removeChild(videoElem);
     };
   }, []);
 
-  return <div id={qrcodeRegionId} />;
+  return (
+    <div>
+      <h1>Código escaneado:</h1>
+      <div className="font-bold h-36 m-10">
+        <div className="">{code[0]}</div>
+        <div>{code[1]}</div>
+        <div>{code[2]}</div>
+      </div>
+      <video
+        id="video"
+        playsInline
+        className=""
+        style={{ width: "10px", height: "10px" }}
+      ></video>
+    </div>
+  );
 };
 
 export default QRScanner;

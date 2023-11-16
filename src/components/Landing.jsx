@@ -6,10 +6,17 @@ import santacruz from "../media/AmericanLogo-SantaCruz.svg";
 import title from "../media/title.png";
 import { useEffect, useState } from "react";
 import QRScanner from "./QRScanner";
+import { Link } from "react-router-dom";
 const Landing = () => {
   const onNewScanResult = (decodedText, decodedResult) => {
     // handle decoded results here
     alert(decodedResult, decodedText);
+  };
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
   };
 
   const [imagePath, setImagePath] = useState(lerma);
@@ -47,19 +54,24 @@ const Landing = () => {
           <img src={title} className="w-[450px]" alt="" />
         </div>
         <div className="mt-10 text-center">
-          <a href="#form-attendance">
-            <button className="font-cinzel btn-chrismas1">
-              Confirmar Asistencia
-            </button>
+          <a href="">
+            <Link to={"/#form-attendance"}>
+              <button
+                onClick={scrollToBottom}
+                className="font-cinzel btn-chrismas1"
+              >
+                Confirmar Asistencia
+              </button>
+            </Link>
           </a>
         </div>
         <div className="">
-          <QRScanner
+          {/* <QRScanner
             fps={10}
             qrbox={250}
             disableFlip={false}
             qrCodeSuccessCallback={onNewScanResult}
-          />
+          /> */}
         </div>
       </div>
       <div class="custom-shape-divider-bottom-1700083642">

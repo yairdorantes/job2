@@ -6,10 +6,8 @@ const QRScanner = () => {
   useEffect(() => {
     const videoElem = document.createElement("video");
     document.body.appendChild(videoElem);
-
     const qrScanner = new QrScanner(
       videoElem,
-
       (result) => {
         // alert(JSON.stringify(result));
         console.log("decoded qr code:", result);

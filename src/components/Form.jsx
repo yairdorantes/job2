@@ -6,9 +6,7 @@ import { useForm } from "react-hook-form";
 import { api, apiWA } from "../api";
 import TimeLine from "./TimeLine";
 import { useState } from "react";
-import QRGenerator from "./QRGenerator";
 import { createQR } from "./CreateQR";
-import QRScanner from "./QRScanner";
 
 const Form = () => {
   const [isSent, setIsSent] = useState(false);
@@ -24,7 +22,7 @@ const Form = () => {
       `Numero de empleado: ${data.employee} | Nombre: ${data.name} | Apellido: ${data.lastname}`
     );
     axios
-      .post(`${apiWA}/message/7293737947`, { imageBase64: base64QR })
+      .post(`${apiWA}/message/${data.phone}`, { imageBase64: base64QR })
       .then((res) => {
         console.log(res.data);
       })
@@ -36,6 +34,9 @@ const Form = () => {
       employee: data.employee,
       name: data.name,
       lastname: data.lastname,
+      phone: data.phone,
+      email: data.email,
+      ticket: base64QR,
     };
     // setEmployeeData(
     //   `Numero de empleado: ${data.employee} | Nombre: ${data.name} | Apellido: ${data.lastname}`
@@ -52,11 +53,10 @@ const Form = () => {
         toast.error("error");
       });
   };
-
   return (
     <section className="">
       <TimeLine></TimeLine>
-      <QRScanner></QRScanner>
+
       <div
         id="form-attendance"
         className="w-full transition-all duration-1000 font-chrismas  pb-10 max-w-xs mx-auto"
@@ -92,7 +92,7 @@ const Form = () => {
                 htmlFor="name"
                 className="block text-lg font-bold text-white"
               >
-                Nombre:
+                Nombre completo:
               </label>
               <input
                 {...register("name", { required: true })}
@@ -101,7 +101,7 @@ const Form = () => {
                 required
               />
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label
                 htmlFor="name"
                 className="block text-lg font-bold text-white"
@@ -114,6 +114,36 @@ const Form = () => {
                 className="mt-1 p-2 w-full border text-black font-bold bg-gray-200 rounded-md"
                 required
               />
+            </div> */}
+            <div className="mb-4">
+              <label
+                htmlFor="name"
+                className="block text-lg font-bold text-white"
+              >
+                Correo empresarial:
+              </label>
+              <input
+                {...register("email", { required: true })}
+                type="email"
+                className="mt-1 p-2 w-full border text-black font-bold bg-gray-200 rounded-md"
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="name"
+                className="block text-lg font-bold text-white"
+              >
+                Numero de celular (WhatsApp):
+              </label>
+              <input
+                {...register("phone", { required: true })}
+                type="number"
+                className="mt-1 p-2 w-full border text-black font-bold bg-gray-200 rounded-md"
+                required
+              />
+              g
             </div>
 
             <div className="flex items-center justify-center">

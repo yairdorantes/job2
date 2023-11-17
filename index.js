@@ -11,7 +11,7 @@ const client = new Client({
 const app = express();
 app.use(cors());
 const HOST = "ec2-18-205-238-236.compute-1.amazonaws.com";
-const port = 3000;
+const port = 8080;
 
 app.use(express.json());
 app.listen(port, HOST, () => {

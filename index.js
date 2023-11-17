@@ -5,13 +5,15 @@ import cors from "cors";
 const { Client, MessageMedia } = pkg;
 const client = new Client({
   puppeteer: {
+    // executablePath: "/usr/bin/google-chrome",
     args: ["--no-sandbox"],
   },
 });
 const app = express();
 app.use(cors());
 const HOST = "ec2-18-205-238-236.compute-1.amazonaws.com";
-const port = 80;
+// const port = 80;
+const port = process.env.PORT || 7000;
 
 app.use(express.json());
 app.listen(port, () => {

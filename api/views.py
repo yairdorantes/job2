@@ -3,9 +3,7 @@ from django.views import View
 import json
 from django.http import JsonResponse, HttpResponse
 from .models import Colaborators
-
-
-# from django.contrib.auth import authenticate
+from django.db.models import Q
 
 
 class ColaboratorsView(View):
@@ -15,16 +13,28 @@ class ColaboratorsView(View):
 
     def post(self, request):
         jd = json.loads(request.body)
-
         employee = jd["employee"]
-        colaborator = Colaborators.objects.filter(employee=employee)
+        phone = jd["phone"]
+        ticketQR = jd["ticket"]
+        colaborator = Colaborators.objects.filter(
+            Q(employee=employee) | Q(phone=phone)
+        ).first()
         if colaborator:
-            print(colaborator)
-
+            if colaborator.ticket == "":
+                colaborator.ticket = ticketQR
+                colaborator.save()
+                return HttpResponse("ok", status=200)
+            else:
+                return HttpResponse("forbidden gfgdgdg", status=403)
         else:
-            print("no")
-        return HttpResponse("ok", 200)
-
+            Colaborators.objects.create(
+                employee=jd["employee"],
+                name=jd["name"],
+                phone=jd["phone"],
+                ticket=jd["ticket"],
+                email=jd["email"],
+            )
+            return HttpResponse("ok", status=200)
         # colaborator = Colaborators.objects.create(
         #     employee=jd["employee"],
         #     name=jd["name"],
@@ -40,4 +50,4 @@ class ColaboratorsView(View):
         # )
         # print(jd)
 
-        return HttpResponse("oki", 200)
+        # return HttpResponse("oki", 200)

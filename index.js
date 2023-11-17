@@ -10,10 +10,11 @@ const client = new Client({
 });
 const app = express();
 app.use(cors());
+const HOST = "0.0.0.0";
 const port = 3000;
 
 app.use(express.json());
-app.listen(port, () => {
+app.listen(port, HOST, () => {
   console.log(`Server is running at port: ${port}`);
 });
 

@@ -15,7 +15,7 @@ const port = 3000;
 
 app.use(express.json());
 app.listen(port, HOST, () => {
-  console.log(`Server is running at port: ${port}`);
+  console.log(`Server is running at http://${HOST}:${port}`);
 });
 
 app.post("/message/:number", async (req, res) => {

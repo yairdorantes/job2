@@ -7,6 +7,14 @@ const client = new Client({
   puppeteer: {
     // executablePath: "/usr/bin/google-chrome",
     args: ["--no-sandbox"],
+    puppeteer: {
+      headless: true,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-extensions",
+      ],
+    },
   },
 });
 const app = express();

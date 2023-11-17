@@ -22,6 +22,7 @@ class ColaboratorsView(View):
         if colaborator:
             if colaborator.ticket == "":
                 colaborator.ticket = ticketQR
+                colaborator.asistencia = 1
                 colaborator.save()
                 return HttpResponse("ok", status=200)
             else:

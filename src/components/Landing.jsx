@@ -5,6 +5,8 @@ import santacruz from "../media/AmericanLogo-SantaCruz.svg";
 import title from "../media/title.png";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { apiWA } from "../api";
 const Landing = () => {
   const scrollToBottom = () => {
     const content = document.getElementById("form-attendance");
@@ -26,6 +28,13 @@ const Landing = () => {
     } else if (path.includes("cruz")) {
       setImagePath(santacruz);
     }
+
+    axios
+      .get(`${apiWA}/`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => [console.log(err)]);
     // path.includes("local") && console.log("yes");
   }, []);
   return (

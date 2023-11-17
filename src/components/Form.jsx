@@ -60,12 +60,12 @@ const Form = () => {
       });
   };
   return (
-    <section className="flex flex-wrap pt-48  justify-center gap-14 sm:gap-40 ">
+    <section
+      id="form-attendance"
+      className="flex flex-wrap pt-24  justify-center gap-14 sm:gap-40 "
+    >
       <TimeLine />
-      <div
-        id="form-attendance"
-        className="w-full transition-all duration-1000 font-chrismas  pb-10 max-w-xs "
-      >
+      <div className="w-full transition-all duration-1000 font-monsterrat  pb-10 max-w-xs ">
         {/* <TimeLine/> */}
         <div className="bg-[#CC231E] p-8 relative rounded-lg shadow-md max-w.lg">
           {/* <div id="eusvg" className="absolute top-2 left-2">
@@ -74,15 +74,12 @@ const Form = () => {
           <div id="eusvg" className="absolute opacity-60 top-1 right-1">
             <img src={cottonSVG} className="w-[80px]" alt="" />
           </div> */}
-          <h2 className="text-2xl font-bold mb-4 text-yellow-300 text-center">
+          <h2 className="text-2xl font-bold mb-4 text-white text-center">
             Confirma tu asistencia
           </h2>
           <form onSubmit={handleSubmit(onSubmit)} action="#" method="post">
             <div className="mb-4">
-              <label
-                htmlFor="name"
-                className="block text-lg font-bold text-white"
-              >
+              <label htmlFor="name" className="block text-lg  text-white">
                 Número de Empleado:
               </label>
               <input
@@ -93,10 +90,7 @@ const Form = () => {
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="name"
-                className="block text-lg font-bold text-white"
-              >
+              <label htmlFor="name" className="block text-lg  text-white">
                 Nombre completo:
               </label>
               <input
@@ -121,10 +115,7 @@ const Form = () => {
               />
             </div> */}
             <div className="mb-4">
-              <label
-                htmlFor="name"
-                className="block text-lg font-bold text-white"
-              >
+              <label htmlFor="name" className="block text-lg  text-white">
                 Correo empresarial:
               </label>
               <input
@@ -136,10 +127,7 @@ const Form = () => {
             </div>
 
             <div className="mb-4">
-              <label
-                htmlFor="name"
-                className="block text-lg font-bold text-white"
-              >
+              <label htmlFor="name" className="block text-lg  text-white">
                 Numero de celular (WhatsApp):
               </label>
               <input
@@ -148,23 +136,23 @@ const Form = () => {
                 className="mt-1 p-2 w-full border text-black font-bold bg-gray-200 rounded-md"
                 required
               />
-              g
             </div>
 
             <div className="flex items-center justify-center">
               <button
                 type="submit"
                 disabled={isSent}
-                className="btn-chrismas mb-5"
+                className="btn-chrismas "
+                // mb-5
               >
                 {isSent ? "Invitacion enviada" : "Enviar"}
               </button>
 
               {/* <QRGenerator data={employeeData} imageName="InvitaciónToday" /> */}
             </div>
-            <div className="link text-gray-100 absolute left-3">
+            {/* <div className="link text-gray-100 absolute left-3">
               ¿Cómo puedo conocer mi número de empleado?
-            </div>
+            </div> */}
           </form>
         </div>
       </div>

@@ -2,7 +2,7 @@ const TimeLine = () => {
   return (
     <div className="max-w-lg ">
       <div className="mb-10">
-        <div className="font-cinzel text-center text-2xl text-black font-bold ">
+        <div className="font-monsterrat text-center text-2xl text-red-600 font-bold ">
           Itinerario
         </div>
         <div className="border-t border-1 border-red-500  w-24 my-2 mx-auto"></div>
@@ -10,7 +10,7 @@ const TimeLine = () => {
 
       <ol className="relative border-s border-red-500">
         <li className="mb-10 ms-4 text-black">
-          <div className="absolute w-3 h-3 bg-red-500 rounded-full mt-1.5 -start-1.5 border border-white "></div>
+          <div className="absolute w-3 h-3 bg-blue-600 rounded-full mt-1.5 -start-1.5 border border-white "></div>
           <time className="mb-1 text-sm font-normal leading-none ">
             3:00 PM - 4:00 PM
           </time>
@@ -21,7 +21,7 @@ const TimeLine = () => {
           </p> */}
         </li>
         <li className="mb-10 ms-4 text-black">
-          <div className="absolute w-3 h-3 bg-red-500 rounded-full mt-1.5 -start-1.5 border border-white  "></div>
+          <div className="absolute w-3 h-3 bg-blue-600 rounded-full mt-1.5 -start-1.5 border border-white  "></div>
           <time className="mb-1 text-sm font-normal leading-none ">
             3:00 PM
           </time>
@@ -32,7 +32,7 @@ const TimeLine = () => {
           </p> */}
         </li>
         <li className="mb-10 ms-4 text-black">
-          <div className="absolute w-3 h-3 bg-red-500 rounded-full mt-1.5 -start-1.5 border border-white  "></div>
+          <div className="absolute w-3 h-3 bg-blue-600 rounded-full mt-1.5 -start-1.5 border border-white  "></div>
           <time className="mb-1 text-sm font-normal leading-none ">
             4:30 PM
           </time>
@@ -43,7 +43,7 @@ const TimeLine = () => {
           </p> */}
         </li>
         <li className="mb-10 ms-4 text-black">
-          <div className="absolute w-3 h-3 bg-red-500 rounded-full mt-1.5 -start-1.5 border border-white  "></div>
+          <div className="absolute w-3 h-3 bg-blue-600 rounded-full mt-1.5 -start-1.5 border border-white  "></div>
           <time className="mb-1 text-sm font-normal leading-none ">
             5:30 PM
           </time>
@@ -54,7 +54,7 @@ const TimeLine = () => {
           </p> */}
         </li>
         <li className="mb-10 ms-4 text-black">
-          <div className="absolute w-3 h-3 bg-red-500 rounded-full mt-1.5 -start-1.5 border border-white  "></div>
+          <div className="absolute w-3 h-3 bg-blue-600 rounded-full mt-1.5 -start-1.5 border border-white  "></div>
           <time className="mb-1 text-sm font-normal leading-none ">
             6:30 PM
           </time>

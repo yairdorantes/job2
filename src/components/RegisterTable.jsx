@@ -15,6 +15,13 @@ const RegisterTable = () => {
         console.log(err);
       });
   };
+  function replaceSpecialCharacter(inputString) {
+    // Replace the symbol � with the letter "ñ"
+    const replacedString = inputString.replace(/�/g, "Ñ");
+    return replacedString;
+  }
+
+  console.log("Welcome to Programiz!");
   useEffect(() => {
     getAttendees();
   }, []);
@@ -22,7 +29,7 @@ const RegisterTable = () => {
   return (
     <div>
       <div className="w-lg sm:w-10/12 mx-auto mt-10 ">
-        <div className="font-cinzel font-bold text-center mb-10">
+        <div className="font-monsterrat font-bold text-center mb-10">
           Inivitados Registrados
         </div>
         <div className="overflow-x-auto">
@@ -42,9 +49,7 @@ const RegisterTable = () => {
               {attendees.map((colab, i) => (
                 <tr key={i}>
                   <th>{colab.employee}</th>
-                  <td>
-                    {colab.name} {colab.lastname}
-                  </td>
+                  <td>{replaceSpecialCharacter(colab.name)}</td>
                   <td>{colab.position}</td>
                   <td>{colab.area}</td>
                   <td className="text-center">

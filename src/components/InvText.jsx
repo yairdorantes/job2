@@ -3,14 +3,11 @@ const InvText = () => {
   return (
     <section className="mt-20">
       <div className="flex gap-10 flex-col justify-center items-center">
-        <div
-          id="hi"
-          className=" font-cinzel flex-col text-[16px] sm:text-[20px]"
-        >
-          <div className="text-black text-center  font-bold">
+        <div id="hi" className=" font-monsterrat flex-col ">
+          <div className="text-red-600 text-center text-[24px] sm:text-[30px]  font-bold">
             Estimados colaboradores y colaboradoras:
           </div>
-          <p className="text-black w-lg sm:w-1/2 mx-auto text-center  mt-5">
+          <p className="text-black w-lg sm:w-1/2 text-[18px] mx-auto text-center  mt-5">
             Gracias por compartir este año de éxitos y desafíos apasionantes.
             <p className="mt-2">
               American Cotton admira y valora tu trabajo, es por eso que te
@@ -28,14 +25,14 @@ const InvText = () => {
               ¡Feliz año nuevo para ti y tus seres queridos! Eres una pieza
               invaluable para el equipo American Cotton.
             </p>
-            <p className="mt-2">
+            <p className="mt-6">
               <span className="font-bold">Cordialmente:</span>
               <p>Directora de Planta</p>
               <p>Ing. Rosalía Albarrán Rodríguez</p>
             </p>
           </p>
         </div>
-        <div>
+        <div className="mt-12">
           <img
             src={people}
             className="w-96 mask mask-heart rounded-md"

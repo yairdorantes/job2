@@ -10,6 +10,7 @@ export default {
         Classic: ["Christmas Classica", "sans-serif"],
         cursive: ["Dancing Script", "cursive"],
         cinzel: ["Cinzel Decorative", "serif"],
+        monsterrat: ["Montserrat", "sans-serif"],
       },
     },
   },

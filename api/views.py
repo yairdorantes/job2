@@ -34,6 +34,7 @@ class ColaboratorsView(View):
                 phone=jd["phone"],
                 ticket=jd["ticket"],
                 email=jd["email"],
+                asistencia=1,
             )
             return HttpResponse("ok", status=200)
         # colaborator = Colaborators.objects.create(

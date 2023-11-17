@@ -37,19 +37,32 @@ class ColaboratorsView(View):
                 asistencia=1,
             )
             return HttpResponse("ok", status=200)
-        # colaborator = Colaborators.objects.create(
-        #     employee=jd["employee"],
-        #     name=jd["name"],
-        #     phone=jd["phone"],
-        #     ticket=jd["ticket"],
-        #     email=jd["email"],
-        # )
-        # colaborator = Colaborators.objects.create(
-        #     employee=jd["employee"],
-        #     name=jd["name"],
-        #     area=jd["area"],
-        #     position=jd["position"],
-        # )
-        # print(jd)
 
-        # return HttpResponse("oki", 200)
+    def put(self, request):
+        jd = json.loads(request.body)
+        employee = jd["employee"]
+        colaborator = Colaborators.objects.filter(Q(employee=employee)).first()
+        if colaborator:
+            colaborator.asistencia = 2
+            colaborator.save()
+            return HttpResponse("ok", status=200)
+        else:
+            return HttpResponse("employee not found", status=404)
+
+
+# colaborator = Colaborators.objects.create(
+#     employee=jd["employee"],
+#     name=jd["name"],
+#     phone=jd["phone"],
+#     ticket=jd["ticket"],
+#     email=jd["email"],
+# )
+# colaborator = Colaborators.objects.create(
+#     employee=jd["employee"],
+#     name=jd["name"],
+#     area=jd["area"],
+#     position=jd["position"],
+# )
+# print(jd)
+
+# return HttpResponse("oki", 200)

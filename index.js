@@ -10,7 +10,7 @@ const client = new Client({
 });
 const app = express();
 app.use(cors());
-const HOST = "0.0.0.0";
+const HOST = "ec2-18-205-238-236.compute-1.amazonaws.com";
 const port = 3000;
 
 app.use(express.json());

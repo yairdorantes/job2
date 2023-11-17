@@ -4,12 +4,16 @@ import santiago from "../media/AmericanLogo-Santiago.svg";
 import santacruz from "../media/AmericanLogo-SantaCruz.svg";
 import title from "../media/title.png";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 const Landing = () => {
   const scrollToBottom = () => {
-    // Assuming your element has an id of 'myElement'
-    const myElement = document.getElementById("form-attendance");
-    // Scroll to the bottom
-    myElement.scrollTop = myElement.scrollHeight;
+    const content = document.getElementById("form-attendance");
+    content.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "nearest",
+    });
+    // window.scrollTo(0, document.body.scrollHeight - 750);
   };
   const [imagePath, setImagePath] = useState(lerma);
   useEffect(() => {
@@ -46,14 +50,16 @@ const Landing = () => {
           <img src={title} className="w-[450px]" alt="" />
         </div>
         <div className="mt-10 text-center">
-          <a href="">
-            <button
-              onClick={scrollToBottom}
-              className="font-cinzel btn-chrismas1"
-            >
-              Confirmar Asistencia
-            </button>
-          </a>
+          {/* <a href=""> */}
+          {/* <Link to="/"> */}
+          <button
+            onClick={scrollToBottom}
+            className="font-cinzel btn-chrismas1"
+          >
+            Confirmar Asistencia
+          </button>
+          {/* </Link> */}
+          {/* </a> */}
         </div>
         <div className="">
           {/* <QRScanner

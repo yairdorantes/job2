@@ -1,6 +1,6 @@
 const Sec3 = () => {
   return (
-    <section className="mt-40  mb-40 mx-auto">
+    <section className="mt-40   mx-auto">
       <div className="text-center mb-10 text-black font-Paragraph font-bold text-2xl">
         <div className=" font-cinzel">Ubicación</div>
         {/* <hr className="h-10  text-black w-10 "/> */}

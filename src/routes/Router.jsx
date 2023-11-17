@@ -7,7 +7,7 @@ import Csv from "../components/Csv";
 const Router = () => {
   return (
     <Routes>
-      <Route path="/:location" element={<MainContent />} />
+      <Route path="/:location/:form" element={<MainContent />} />
       <Route path="/invitados" element={<RegisterTable />} />
       <Route path="/scanner" element={<QRScanner />} />
       <Route path="/csv" element={<Csv />} />

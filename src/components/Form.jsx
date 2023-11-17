@@ -60,7 +60,7 @@ const Form = () => {
       });
   };
   return (
-    <section className="flex flex-wrap  justify-center gap-14 sm:gap-40 ">
+    <section className="flex flex-wrap pt-48  justify-center gap-14 sm:gap-40 ">
       <TimeLine />
       <div
         id="form-attendance"

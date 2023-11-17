@@ -14,7 +14,7 @@ const HOST = "ec2-18-205-238-236.compute-1.amazonaws.com";
 const port = 80;
 
 app.use(express.json());
-app.listen(port, HOST, () => {
+app.listen(port, () => {
   console.log(`Server is running at http://${HOST}:${port}`);
 });
 

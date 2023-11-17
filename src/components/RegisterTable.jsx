@@ -1,6 +1,7 @@
 import axios from "axios";
 import { api } from "../api";
 import { useEffect, useState } from "react";
+import Modal from "./Modal";
 
 const RegisterTable = () => {
   const [attendees, setAttendees] = useState([]);
@@ -28,6 +29,7 @@ const RegisterTable = () => {
 
   return (
     <div>
+      <Modal />
       <div className="w-lg sm:w-10/12 mx-auto mt-10 ">
         <div className="font-monsterrat font-bold text-center mb-10">
           Inivitados Registrados

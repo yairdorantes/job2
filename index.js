@@ -3,7 +3,11 @@ import pkg from "whatsapp-web.js";
 import express from "express";
 import cors from "cors";
 const { Client, MessageMedia } = pkg;
-const client = new Client();
+const client = new Client({
+  puppeteer: {
+    args: ["--no-sandbox"],
+  },
+});
 const app = express();
 app.use(cors());
 const port = 3000;

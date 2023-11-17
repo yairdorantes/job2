@@ -2,28 +2,45 @@ import people from "../media/meet.jpg";
 const InvText = () => {
   return (
     <section className="mt-20">
-      <div className="flex gap-5 flex-wrap justify-center items-center">
-        <div id="hi" className=" font-cinzel flex-col text-[20px]">
-          <div className="text-black text-center sm:text-left font-bold">
-            Estimados colaboradores:
+      <div className="flex gap-10 flex-col justify-center items-center">
+        <div
+          id="hi"
+          className=" font-cinzel flex-col text-[16px] sm:text-[20px]"
+        >
+          <div className="text-black text-center  font-bold">
+            Estimados colaboradores y colaboradoras:
           </div>
-          <p className="text-black max-w-lg text-center sm:text-left mt-5">
-            En agradecimiento a su entera colaboración y esfuerzo se les hace
-            una cordial invitación para asistir a nuestra fiesta de fin de año
-            El día
-            <span className="font-bold">
-              {" "}
-              12 de diciembre a las 2:00 pm en el Salón Vickys
-            </span>
-            , ubicado en{" "}
-            <span className="">
-              Ron de Hank, Prolongación, Don Catarino González Benítez, Colonia
-              Guadalupe, 52600 Santiago Tianguistenco, Méx.
-            </span>
+          <p className="text-black w-lg sm:w-1/2 mx-auto text-center  mt-5">
+            Gracias por compartir este año de éxitos y desafíos apasionantes.
+            <p className="mt-2">
+              American Cotton admira y valora tu trabajo, es por eso que te
+              hacemos la cordial invitación para asistir a nuestra celebración
+              de fin de año, en agradecimiento a su entera colaboración,
+              dedicación y esfuerzo, el{" "}
+              <span className="font-bold">
+                12 de diciembre de 2023 a las 14:00 hrs. en el salón “Vicky´s”
+              </span>
+              , ubicado en Ron de Hank, Prolongación, Don Catarino González
+              Benítez, Colonia Guadalupe, 52600 Santiago Tianguistenco, Méx.
+            </p>{" "}
+            Confirma tu asistencia antes del 30 de noviembre de 2023.
+            <p>
+              ¡Feliz año nuevo para ti y tus seres queridos! Eres una pieza
+              invaluable para el equipo American Cotton.
+            </p>
+            <p className="mt-2">
+              <span className="font-bold">Cordialmente:</span>
+              <p>Directora de Planta</p>
+              <p>Ing. Rosalía Albarrán Rodríguez</p>
+            </p>
           </p>
         </div>
         <div>
-          <img src={people} className="w-80  rounded-md" alt="" />
+          <img
+            src={people}
+            className="w-96 mask mask-heart rounded-md"
+            alt=""
+          />
         </div>
       </div>
 

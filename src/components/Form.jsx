@@ -19,21 +19,12 @@ const Form = () => {
   } = useForm();
   const onSubmit = async (data) => {
     const base64QR = await createQR(
-      `Numero de empleado: ${data.employee} | Nombre: ${data.name} | Apellido: ${data.lastname}`
+      `Numero de empleado: ${data.employee} | Nombre: ${data.name} |`
     );
-    axios
-      .post(`${apiWA}/message/${data.phone}`, { imageBase64: base64QR })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
     setIsSent(true);
     const newColab = {
       employee: data.employee,
       name: data.name,
-      lastname: data.lastname,
       phone: data.phone,
       email: data.email,
       ticket: base64QR,
@@ -41,25 +32,39 @@ const Form = () => {
     // setEmployeeData(
     //   `Numero de empleado: ${data.employee} | Nombre: ${data.name} | Apellido: ${data.lastname}`
     // );
-    console.log(data);
+    // console.log(data);
     axios
       .post(`${api}/colabs`, newColab)
       .then((res) => {
-        console.log(res);
-        toast.success("Enviado con éxito!");
+        // console.log(res);
+        axios
+          .post(`${apiWA}/message/${data.phone}`, { imageBase64: base64QR })
+          .then((res) => {
+            toast.success("Initación enviada con éxito!");
+            // console.log(res.data);
+          })
+          .catch((err) => {
+            toast.error("Ocurrio un error, intenta nuevamente");
+            console.log(err);
+          });
       })
       .catch((err) => {
-        console.log(err);
-        toast.error("error");
+        console.log(err.response.status);
+        if (err.response.status === 403) {
+          toast.error(
+            "Tu invitación ya ha sido enviada. Por favor, revisa tu bandeja de WhatsApp."
+          );
+        } else {
+          toast.error("Ocurrio un error, intenta nuevamente");
+        }
       });
   };
   return (
-    <section className="">
-      <TimeLine></TimeLine>
-
+    <section className="flex flex-wrap  justify-center gap-14 sm:gap-40 ">
+      <TimeLine />
       <div
         id="form-attendance"
-        className="w-full transition-all duration-1000 font-chrismas  pb-10 max-w-xs mx-auto"
+        className="w-full transition-all duration-1000 font-chrismas  pb-10 max-w-xs "
       >
         {/* <TimeLine/> */}
         <div className="bg-[#CC231E] p-8 relative rounded-lg shadow-md max-w.lg">
@@ -70,7 +75,7 @@ const Form = () => {
             <img src={cottonSVG} className="w-[80px]" alt="" />
           </div> */}
           <h2 className="text-2xl font-bold mb-4 text-yellow-300 text-center">
-            Fiesta de Fin de Año
+            Confirma tu asistencia
           </h2>
           <form onSubmit={handleSubmit(onSubmit)} action="#" method="post">
             <div className="mb-4">
@@ -147,8 +152,12 @@ const Form = () => {
             </div>
 
             <div className="flex items-center justify-center">
-              <button type="submit" className="btn-chrismas mb-5">
-                Enviar
+              <button
+                type="submit"
+                disabled={isSent}
+                className="btn-chrismas mb-5"
+              >
+                {isSent ? "Invitacion enviada" : "Enviar"}
               </button>
 
               {/* <QRGenerator data={employeeData} imageName="InvitaciónToday" /> */}

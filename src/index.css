@@ -36,7 +36,6 @@ body {
   fill: #ffffff;
 }
 
-
 .progress-bar {
   position: fixed;
   top: 0;
@@ -187,7 +186,7 @@ body {
 
 /* Define scrollbar styles */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 /* Handle */
@@ -216,7 +215,7 @@ body {
 ::-webkit-scrollbar-track-piece:end {
   background-image: linear-gradient(
     to right,
-    #ffcc00,
+    #005d96,
     #cc3300
   ); /* Gradient for lights */
 }
@@ -231,6 +230,6 @@ body {
 
 /* Optional: Add a border to the scrollbar */
 ::-webkit-scrollbar {
-  border: 3px solid #ff0000; /* Red border around the scrollbar */
+  border: 3px solid #ff0000;
   border-radius: 8px;
 }

@@ -55,10 +55,10 @@ const MainContent = () => {
         <Form />
         <Snowfall
           // images={images}
-          color="#dadee7fd"
+          color="#f6f8fbfc"
           speed={[0.5, 0.5]}
           radius={[2, 4]}
-          snowflakeCount={100}
+          snowflakeCount={95}
           style={{
             position: "fixed",
             width: "100vw",

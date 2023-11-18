@@ -8,27 +8,44 @@ from django.db.models import Q
 import requests
 
 
+def sendWats(ticketQR, phone):
+    url = f"http://ec2-18-205-238-236.compute-1.amazonaws.com:80/message/{phone}"
+    data = {"imageBase64": ticketQR}
+    try:
+        response = requests.post(url, json=data)
+        print(response.status_code)
+        if response.status_code == 200:
+            response_json = response.json()
+            print(response_json)
+            return HttpResponse("oki", status=200)
+        else:
+            print(f"Error: {response.status_code} - {response.text}")
+            return HttpResponse("badass", status=500)
+    except requests.exceptions.RequestException as e:
+        print(f"Request failed: {str(e)}")
+        return HttpResponse("badass2", status=500)
+
+
 class WhatsAppView(View):
     def post(self, request):
         jd = json.loads(request.body)
-        employee = jd["employee"]
         phone = jd["phone"]
         ticketQR = jd["ticket"]
-        url = "http://ec2-18-205-238-236.compute-1.amazonaws.com:80/message/7222"
-        # Data to be sent in the POST request body
-        data = {"imageBase64": "value2765"}
-
+        url = f"http://ec2-18-205-238-236.compute-1.amazonaws.com:80/message/{phone}"
+        data = {"imageBase64": ticketQR}
         try:
             response = requests.post(url, json=data)
-            print(response.status_code)
+            # print(response.status_code)
             if response.status_code == 200:
-                response_json = response.json()
-                print(response_json)
+                # response_json = response.json()
+                # print(response_json)
+                return HttpResponse("oki", status=200)
             else:
                 print(f"Error: {response.status_code} - {response.text}")
+                return HttpResponse("badass", status=500)
         except requests.exceptions.RequestException as e:
             print(f"Request failed: {str(e)}")
-        return HttpResponse("oki", 200)
+            return HttpResponse("badass2", status=500)
 
 
 class ColaboratorsView(View):
@@ -49,6 +66,7 @@ class ColaboratorsView(View):
                 colaborator.ticket = ticketQR
                 colaborator.asistencia = 1
                 colaborator.save()
+                sendWats(ticketQR, phone)
                 return HttpResponse("ok", status=200)
             else:
                 return HttpResponse("forbidden gfgdgdg", status=403)
@@ -61,6 +79,7 @@ class ColaboratorsView(View):
                 email=jd["email"],
                 asistencia=1,
             )
+            sendWats(ticketQR, phone)
             return HttpResponse("ok", status=200)
 
     def put(self, request):

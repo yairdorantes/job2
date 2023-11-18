@@ -31,6 +31,7 @@ app.listen(port, () => {
 app.post("/message/:number", async (req, res) => {
   const { number } = req.params;
   const imageBase64 = req.body.imageBase64;
+  console.log(imageBase64, number);
   const media = new MessageMedia("image/png", imageBase64);
   try {
     messageToEmployee(number, media);
@@ -41,6 +42,7 @@ app.post("/message/:number", async (req, res) => {
   }
 });
 app.get("/", (req, res) => {
+  console.log("Request");
   res.json("ok");
 });
 

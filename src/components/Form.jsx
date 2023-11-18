@@ -3,7 +3,7 @@
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { api, apiWA } from "../api";
+import { api } from "../api";
 import TimeLine from "./TimeLine";
 import { useState } from "react";
 import { createQR } from "./CreateQR";
@@ -36,17 +36,7 @@ const Form = () => {
     axios
       .post(`${api}/colabs`, newColab)
       .then((res) => {
-        // console.log(res);
-        axios
-          .post(`${apiWA}/message/${data.phone}`, { imageBase64: base64QR })
-          .then((res) => {
-            toast.success("Initación enviada con éxito!");
-            // console.log(res.data);
-          })
-          .catch((err) => {
-            toast.error("Ocurrio un error, intenta nuevamente");
-            console.log(err);
-          });
+        toast.success("Initación enviada con éxito!");
       })
       .catch((err) => {
         console.log(err.response.status);

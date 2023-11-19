@@ -18,6 +18,7 @@ class Colaborators(models.Model):
     location = models.CharField(
         max_length=200, verbose_name="Planta", default="", blank=True, null=True
     )
+
     phone = models.IntegerField(verbose_name="Celular", default=0)
     asistencia = models.IntegerField(default=0, verbose_name="Asistencia")
     email = models.EmailField(default="example@example.com", verbose_name="Email")
@@ -25,3 +26,11 @@ class Colaborators(models.Model):
 
     def __str__(self):
         return self.name
+
+    """
+    location:
+    1 lerma
+    2 santiago
+    3 cadereyta
+    4 FX
+    """

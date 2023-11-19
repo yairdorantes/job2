@@ -13,17 +13,17 @@ def sendWats(ticketQR, phone):
     data = {"imageBase64": ticketQR}
     try:
         response = requests.post(url, json=data)
-        print(response.status_code)
+        # print(response.status_code)
         if response.status_code == 200:
-            response_json = response.json()
-            print(response_json)
-            return HttpResponse("oki", status=200)
+            # response_json = response.json()
+            # print(response_json)
+            return 200
         else:
             print(f"Error: {response.status_code} - {response.text}")
-            return HttpResponse("badass", status=500)
+            return 500
     except requests.exceptions.RequestException as e:
         print(f"Request failed: {str(e)}")
-        return HttpResponse("badass2", status=500)
+        return 500
 
 
 class WhatsAppView(View):
@@ -49,9 +49,13 @@ class WhatsAppView(View):
 
 
 class ColaboratorsView(View):
-    def get(self, request):
-        colaborators = Colaborators.objects.values().order_by("-asistencia")
-        return JsonResponse({"colabs": list(colaborators)})
+    def get(self, request, location=0):
+        if location > 0:
+            colaborators = list(Colaborators.objects.filter(location=location).values())
+            return JsonResponse({"colabs": list(colaborators)})
+        else:
+            colaborators = Colaborators.objects.values().order_by("-asistencia")
+            return JsonResponse({"colabs": list(colaborators)})
 
     def post(self, request):
         jd = json.loads(request.body)
@@ -63,13 +67,17 @@ class ColaboratorsView(View):
         ).first()
         if colaborator:
             if colaborator.ticket == "":
+                colaborator.asistencia = jd["location"]
                 colaborator.ticket = ticketQR
                 colaborator.asistencia = 1
                 colaborator.save()
-                sendWats(ticketQR, phone)
-                return HttpResponse("ok", status=200)
+                whats_result = sendWats(ticketQR, phone)
+                if whats_result == 200:
+                    return HttpResponse("ok", status=200)
+                else:
+                    return HttpResponse("bad", status=500)
             else:
-                return HttpResponse("forbidden gfgdgdg", status=403)
+                return HttpResponse("forbidden", status=403)
         else:
             Colaborators.objects.create(
                 employee=jd["employee"],
@@ -78,9 +86,13 @@ class ColaboratorsView(View):
                 ticket=jd["ticket"],
                 email=jd["email"],
                 asistencia=1,
+                location=jd["location"],
             )
-            sendWats(ticketQR, phone)
-            return HttpResponse("ok", status=200)
+            whats_result = sendWats(ticketQR, phone)
+            if whats_result == 200:
+                return HttpResponse("ok", status=200)
+            else:
+                return HttpResponse("ok", status=500)
 
     def put(self, request):
         jd = json.loads(request.body)
@@ -93,6 +105,14 @@ class ColaboratorsView(View):
         else:
             return HttpResponse("employee not found", status=404)
 
+
+"""
+    location:
+    1 lerma
+    2 santiago
+    3 cadereyta
+    4 FX
+"""
 
 # colaborator = Colaborators.objects.create(
 #     employee=jd["employee"],

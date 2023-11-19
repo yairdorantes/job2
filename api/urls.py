@@ -4,5 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     path("colabs", csrf_exempt(ColaboratorsView.as_view()), name="colabs"),
+    path(
+        "colabs/<int:location>", csrf_exempt(ColaboratorsView.as_view()), name="colabs"
+    ),
     path("wa", csrf_exempt(WhatsAppView.as_view()), name="WA"),
 ]

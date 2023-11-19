@@ -1,5 +1,3 @@
-// import ecSVG from "../media/eusvg.svg";
-// import cottonSVG from "../media/cotton.svg";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -7,9 +5,13 @@ import { api } from "../api";
 import TimeLine from "./TimeLine";
 import { useState } from "react";
 import { createQR } from "./CreateQR";
+import useStore from "../Context";
 
 const Form = () => {
   const [isSent, setIsSent] = useState(false);
+  const { location } = useStore();
+  const [isLoading, setIsLoading] = useState(false);
+
   // const [employeeData, setEmployeeData] = useState("example 1 jhagjasgjhsg sa gsajsg ja gsaj shgasjgsajas sjg");
   const {
     register,
@@ -21,33 +23,41 @@ const Form = () => {
     const base64QR = await createQR(
       `Numero de empleado: ${data.employee} | Nombre: ${data.name} |`
     );
-    setIsSent(true);
     const newColab = {
       employee: data.employee,
       name: data.name,
       phone: data.phone,
       email: data.email,
       ticket: base64QR,
+      location: location,
     };
+    console.log(newColab);
     // setEmployeeData(
     //   `Numero de empleado: ${data.employee} | Nombre: ${data.name} | Apellido: ${data.lastname}`
     // );
     // console.log(data);
+    setIsLoading(true);
     axios
       .post(`${api}/colabs`, newColab)
       .then((res) => {
-        toast.success("Initación enviada con éxito!");
+        setIsSent(true);
+
+        toast.success("Initación enviada con éxito!", { duration: 3000 });
       })
       .catch((err) => {
         console.log(err.response.status);
         if (err.response.status === 403) {
           toast.error(
-            "Tu invitación ya ha sido enviada. Por favor, revisa tu bandeja de WhatsApp."
+            "Tu invitación ya ha sido enviada. Por favor, revisa tu bandeja de WhatsApp.",
+            { duration: 3000 }
           );
         } else {
-          toast.error("Ocurrio un error, intenta nuevamente");
+          toast.error("Ocurrio un error, intenta nuevamente", {
+            duration: 3000,
+          });
         }
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
   return (
     <section
@@ -90,20 +100,6 @@ const Form = () => {
                 required
               />
             </div>
-            {/* <div className="mb-4">
-              <label
-                htmlFor="name"
-                className="block text-lg font-bold text-white"
-              >
-                Apellido:
-              </label>
-              <input
-                {...register("lastname", { required: true })}
-                type="text"
-                className="mt-1 p-2 w-full border text-black font-bold bg-gray-200 rounded-md"
-                required
-              />
-            </div> */}
             <div className="mb-4">
               <label htmlFor="name" className="block text-lg  text-white">
                 Correo empresarial:
@@ -115,7 +111,6 @@ const Form = () => {
                 required
               />
             </div>
-
             <div className="mb-4">
               <label htmlFor="name" className="block text-lg  text-white">
                 Numero de celular (WhatsApp):
@@ -135,11 +130,21 @@ const Form = () => {
                 className="btn-chrismas "
                 // mb-5
               >
-                {isSent ? "Invitacion enviada" : "Enviar"}
+                {isSent && !isLoading ? (
+                  "Invitación enviada"
+                ) : (
+                  <>
+                    {isLoading && (
+                      <span className="loading loading-spinner text-info"></span>
+                    )}
+                    {!isLoading && "Enviar"}
+                  </>
+                )}
               </button>
 
               {/* <QRGenerator data={employeeData} imageName="InvitaciónToday" /> */}
             </div>
+
             {/* <div className="link text-gray-100 absolute left-3">
               ¿Cómo puedo conocer mi número de empleado?
             </div> */}

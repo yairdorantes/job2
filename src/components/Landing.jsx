@@ -4,9 +4,12 @@ import santiago from "../media/AmericanLogo-Santiago.svg";
 import santacruz from "../media/AmericanLogo-SantaCruz.svg";
 import title from "../media/title.png";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import useStore from "../Context";
+import { locations } from "../api";
+
 const Landing = () => {
+  const { location, changeLocation } = useStore();
+
   const scrollToBottom = () => {
     const content = document.getElementById("form-attendance");
     content.scrollIntoView({
@@ -14,20 +17,31 @@ const Landing = () => {
       block: "end",
       inline: "nearest",
     });
-    // window.scrollTo(0, document.body.scrollHeight - 750);
   };
   const [imagePath, setImagePath] = useState(lerma);
   useEffect(() => {
     let path = window.location.href;
     console.log(path);
-    if (path.includes("lerma")) {
+    if (path.includes(locations.lerma)) {
       setImagePath(lerma);
-    } else if (path.includes("santiago")) {
+      changeLocation(1);
+    } else if (
+      path.includes(locations.santiago) | path.includes(locations.cruz)
+    ) {
       setImagePath(santiago);
-    } else if (path.includes("cruz")) {
+      changeLocation(2);
+    } else if (path.includes(locations.cadereyta)) {
       setImagePath(santacruz);
+      changeLocation(3);
+    } else if (
+      path.includes(locations.division) | path.includes(locations.fx)
+    ) {
+      changeLocation(4);
+      console.log(location);
+      alert("FX");
     }
   }, []);
+
   return (
     <section className="relative">
       <div className="fixed  top-0 z-10 p-2 backdrop-blur-sm bg-white-30 h-24 inset-x-0 mx-auto w-screen ">
@@ -50,25 +64,14 @@ const Landing = () => {
           <img src={title} className="w-[450px]" alt="" />
         </div>
         <div className="mt-10 text-center">
-          {/* <a href=""> */}
-          {/* <Link to="/"> */}
           <button
             onClick={scrollToBottom}
             className="font-cinzel btn-chrismas1"
           >
             Confirmar Asistencia
           </button>
-          {/* </Link> */}
-          {/* </a> */}
         </div>
-        <div className="">
-          {/* <QRScanner
-            fps={10}
-            qrbox={250}
-            disableFlip={false}
-            qrCodeSuccessCallback={onNewScanResult}
-          /> */}
-        </div>
+        <div className=""></div>
       </div>
       <div className="custom-shape-divider-bottom-1700083642">
         <svg
@@ -83,7 +86,6 @@ const Landing = () => {
           ></path>
         </svg>
       </div>
-      {/* <a href="#form-attendance">form</a> */}
     </section>
   );
 };

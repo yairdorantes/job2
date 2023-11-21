@@ -8,11 +8,8 @@ import Landing from "./Landing";
 import InvText from "./InvText";
 import Sec3 from "./Sec3";
 import { motion, useScroll, useSpring } from "framer-motion";
-import cotton from "../media/ejemplo.png";
-import cotton2 from "../media/lol.jpg";
 
 const MainContent = () => {
-  const images = [cotton, cotton2];
   const { scrollYProgress } = useScroll();
   const getColaborators = () => {
     axios

@@ -1,7 +1,8 @@
-import bg from "../media/bglex.jpg";
+import bg from "../media/bluebg.svg";
 import lerma from "../media/AmericanLogo-Lerma.svg";
-import santiago from "../media/AmericanLogo-Santiago.svg";
-import santacruz from "../media/AmericanLogo-SantaCruz.svg";
+import ss from "../media/ss.svg";
+import division from "../media/fx.svg";
+import cadereyta from "../media/cadereyta.svg";
 import title from "../media/title.png";
 import { useEffect, useState } from "react";
 import useStore from "../Context";
@@ -28,14 +29,16 @@ const Landing = () => {
     } else if (
       path.includes(locations.santiago) | path.includes(locations.cruz)
     ) {
-      setImagePath(santiago);
+      setImagePath(ss);
       changeLocation(2);
     } else if (path.includes(locations.cadereyta)) {
-      setImagePath(santacruz);
+      setImagePath(cadereyta);
       changeLocation(3);
     } else if (
       path.includes(locations.division) | path.includes(locations.fx)
     ) {
+      setImagePath(division);
+
       changeLocation(4);
     }
   }, []);
@@ -53,7 +56,7 @@ const Landing = () => {
       </div>
       <div
         style={{
-          // width: "100vw",
+          width: "100vw",
           backgroundImage: `url(${bg})`,
         }}
         className="min-h-screen w-screen bg-fixed relative bg-cover bg-center flex flex-col items-center justify-center"

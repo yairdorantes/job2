@@ -1,4 +1,4 @@
-import people from "../media/meet.jpg";
+import people from "../media/meet2.svg";
 const InvText = () => {
   return (
     <section className="mt-20">

@@ -55,8 +55,8 @@ const QRScanner = () => {
   return (
     <div>
       <Modal />
-      <div className="max-w-lg h-[380px] mx-auto pt-24 text-center ">
-        <h1 className="text-lg">Código escaneado:</h1>
+      <div className="max-w-lg h-[320px] mx-auto pt-24 text-center ">
+        <h1 className="text-lg animate-blink">Código escaneado:</h1>
         <div className="font-bold h-28 mt-2 flex flex-col items-center justify-center">
           {code[0].length > 0 ? (
             <div>

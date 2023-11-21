@@ -93,11 +93,11 @@ DATABASES = {
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "railway",
-#         "USER": "postgres",
-#         "PASSWORD": "A6f6-1-edC-1a5bGf5Dg26Cf*gcAgfcd",
-#         "HOST": "roundhouse.proxy.rlwy.net",
-#         "PORT": "40373",
+#         "NAME": "event",
+#         "USER": "yair",
+#         "PASSWORD": "1234",
+#         "HOST": "ec2-18-205-238-236.compute-1.amazonaws.com",
+#         "PORT": "5432",
 #     }
 # }
 # kk

@@ -1,6 +1,6 @@
 import bg from "../media/bluebg.svg";
 import lerma from "../media/AmericanLogo-Lerma.svg";
-import ss from "../media/ss.svg";
+import ss from "../media/SS.svg";
 import division from "../media/fx.svg";
 import cadereyta from "../media/cadereyta.svg";
 import title from "../media/title.png";

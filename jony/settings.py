@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173/",
-    "https://job2-production.up.railway.app",
+    "https://job2-production-b818.up.railway.app",
 ]
 # SITE_URL = "https://jony-production.up.railway.app"
 
@@ -93,11 +93,11 @@ WSGI_APPLICATION = "jony.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "event",
-        "USER": "yair",
-        "PASSWORD": "1234",
-        "HOST": "ec2-18-205-238-236.compute-1.amazonaws.com",
-        "PORT": "5432",
+        "NAME": "railway",
+        "USER": "postgres",
+        "PASSWORD": "*4AF6g1gA-ed6bccg3BFaf1dBbcA5d16",
+        "HOST": "roundhouse.proxy.rlwy.net",
+        "PORT": "24059",
     }
 }
 # kk

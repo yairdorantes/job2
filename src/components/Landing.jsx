@@ -37,8 +37,6 @@ const Landing = () => {
       path.includes(locations.division) | path.includes(locations.fx)
     ) {
       changeLocation(4);
-      console.log(location);
-      alert("FX");
     }
   }, []);
 

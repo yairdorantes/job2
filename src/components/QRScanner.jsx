@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import Modal from "./Modal";
 
 const QRScanner = () => {
-  const [code, setCode] = useState([""]);
+  const [code, setCode] = useState(["no emepelado"]);
   useEffect(() => {
     const videoElem = document.createElement("video");
     document.body.appendChild(videoElem);

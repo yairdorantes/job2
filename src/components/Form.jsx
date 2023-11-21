@@ -21,7 +21,7 @@ const Form = () => {
   } = useForm();
   const onSubmit = async (data) => {
     const base64QR = await createQR(
-      `Numero de empleado: ${data.employee} | Nombre: ${data.name} |`
+      `Identificador: ${data.employee} | Nombre: ${data.name} |`
     );
     const newColab = {
       employee: data.employee,
@@ -91,7 +91,7 @@ const Form = () => {
           <form onSubmit={handleSubmit(onSubmit)} action="#" method="post">
             <div className="mb-2">
               <label htmlFor="name" className="block text-lg  text-white">
-                NOI o :
+                NOI o WEB:
               </label>
               <input
                 {...register("employee", { required: true })}
@@ -102,9 +102,9 @@ const Form = () => {
             </div>
             <div
               onClick={() => document.getElementById("my_modal_2").showModal()}
-              className="link link-white text-sm"
+              className="link link-info text-sm"
             >
-              ¿Como puedo conocer mi numero de empleado?
+              ¿Como puedo conocer este dato?
             </div>
             <div className="mb-4">
               <label htmlFor="name" className="block text-lg  text-white">

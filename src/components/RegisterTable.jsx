@@ -61,7 +61,7 @@ const RegisterTable = () => {
             {/* head */}
             <thead>
               <tr>
-                <th>No. Empleado</th>
+                <th>Empleado ID</th>
                 <th>Nombre</th>
                 <th>Puesto</th>
                 <th>Area</th>

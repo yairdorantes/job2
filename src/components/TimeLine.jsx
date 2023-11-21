@@ -12,7 +12,7 @@ const TimeLine = () => {
         <li className="mb-10 ms-4 text-black">
           <div className="absolute w-3 h-3 bg-blue-600 rounded-full mt-1.5 -start-1.5 border border-white "></div>
           <time className="mb-1 text-sm font-normal leading-none ">
-            3:00 PM - 4:00 PM
+            2:00 PM - 3:00 PM
           </time>
           <h3 className="text-lg font-semibold ">Recepción</h3>
           {/* <p className="mb-4 text-base font-normal">

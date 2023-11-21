@@ -38,7 +38,6 @@ const Landing = () => {
       path.includes(locations.division) | path.includes(locations.fx)
     ) {
       setImagePath(division);
-
       changeLocation(4);
     }
   }, []);

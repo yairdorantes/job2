@@ -64,6 +64,17 @@ const Form = () => {
       id="form-attendance"
       className="flex flex-wrap pt-24  justify-center gap-14 sm:gap-40 "
     >
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+
+      <dialog id="my_modal_2" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Data!</h3>
+          <p className="py-4">Data</p>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
       <TimeLine />
       <div className="w-full transition-all duration-1000 font-monsterrat  pb-10 max-w-xs ">
         {/* <TimeLine/> */}
@@ -78,9 +89,9 @@ const Form = () => {
             Confirma tu asistencia
           </h2>
           <form onSubmit={handleSubmit(onSubmit)} action="#" method="post">
-            <div className="mb-4">
+            <div className="mb-2">
               <label htmlFor="name" className="block text-lg  text-white">
-                Número de Empleado:
+                NOI o :
               </label>
               <input
                 {...register("employee", { required: true })}
@@ -88,6 +99,12 @@ const Form = () => {
                 className="mt-1 p-2 w-full border text-black font-bold bg-gray-200 rounded-md"
                 required
               />
+            </div>
+            <div
+              onClick={() => document.getElementById("my_modal_2").showModal()}
+              className="link link-white text-sm"
+            >
+              ¿Como puedo conocer mi numero de empleado?
             </div>
             <div className="mb-4">
               <label htmlFor="name" className="block text-lg  text-white">
@@ -105,10 +122,10 @@ const Form = () => {
                 Correo empresarial:
               </label>
               <input
-                {...register("email", { required: true })}
+                {...register("email", { required: false })}
                 type="email"
                 className="mt-1 p-2 w-full border text-black font-bold bg-gray-200 rounded-md"
-                required
+                placeholder="*opcional*"
               />
             </div>
             <div className="mb-4">
@@ -127,7 +144,7 @@ const Form = () => {
               <button
                 type="submit"
                 disabled={isSent}
-                className="btn-chrismas "
+                className="btn-chrismas mb-4"
                 // mb-5
               >
                 {isSent && !isLoading ? (
@@ -141,11 +158,9 @@ const Form = () => {
                   </>
                 )}
               </button>
-
               {/* <QRGenerator data={employeeData} imageName="InvitaciónToday" /> */}
             </div>
-
-            {/* <div className="link text-gray-100 absolute left-3">
+            {/* <div className="link text-gray-100  ">
               ¿Cómo puedo conocer mi número de empleado?
             </div> */}
           </form>

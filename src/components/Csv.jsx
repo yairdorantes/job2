@@ -21,14 +21,14 @@ const Csv = () => {
         position: element[1],
       };
       console.log(newColab.area);
-      //   axios
-      //     .post(`${api}/colabs`, newColab)
-      //     .then((res) => {
-      //       console.log("check");
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //     });
+      axios
+        .post(`${api}/colabs`, newColab)
+        .then((res) => {
+          console.log("check");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     });
   };
   return (

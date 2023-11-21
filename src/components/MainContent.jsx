@@ -1,37 +1,12 @@
-import axios from "axios";
-import { api } from "../api";
 import Snowfall from "react-snowfall";
 import bg from "../media/bg.jpeg";
-import Swal from "sweetalert2";
 import Form from "./Form";
 import Landing from "./Landing";
 import InvText from "./InvText";
 import Sec3 from "./Sec3";
-import { motion, useScroll, useSpring } from "framer-motion";
-
+import { motion, useScroll } from "framer-motion";
 const MainContent = () => {
   const { scrollYProgress } = useScroll();
-  const getColaborators = () => {
-    axios
-      .get(`${api}/colabs`)
-      .then((res) => {
-        console.log(res);
-        const colabs = res.data.colabs;
-        console.log(colabs);
-        Swal.fire({
-          html: `
-            <ul className="list-disc pl-4">
-            ${colabs
-              .map((colab, i) => `<li className="mb-2">${colabs[i].name}</li>`)
-              .join("")}
-          </ul>
-            `,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   return (
     <div
       className="min-h-screen relative bg-cover bg-center"
@@ -47,6 +22,9 @@ const MainContent = () => {
 
       <Landing />
       <div className="mx-4">
+        <div className="text-black text-sm fixed bottom-2 z-10 opacity-80 right-2">
+          Powered By <span className="font-bold">Ecommerce Team</span>
+        </div>
         <InvText />
         <Sec3 />
         <Form />

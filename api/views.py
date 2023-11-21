@@ -1,5 +1,3 @@
-# Create your views here.
-from curses.ascii import HT
 from django.views import View
 import json
 from django.http import JsonResponse, HttpResponse
@@ -87,9 +85,9 @@ class ColaboratorsView(View):
             Colaborators.objects.create(
                 employee=jd["employee"],
                 name=jd["name"],
-                phone=jd["phone"],
+                phone=jd.get("phone", ""),
                 ticket=jd["ticket"],
-                email=jd["email"],
+                email=jd.get("email", ""),
                 asistencia=1,
                 location=jd["location"],
             )

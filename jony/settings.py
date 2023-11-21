@@ -83,23 +83,35 @@ WSGI_APPLICATION = "jony.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
+
 # DATABASES = {
 #     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "railway",
+#         "USER": "postgres",
+#         "PASSWORD": "*4AF6g1gA-ed6bccg3BFaf1dBbcA5d16",
+#         "HOST": "roundhouse.proxy.rlwy.net",
+#         "PORT": "24059",
 #     }
 # }
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "railway",
-        "USER": "postgres",
-        "PASSWORD": "*4AF6g1gA-ed6bccg3BFaf1dBbcA5d16",
-        "HOST": "roundhouse.proxy.rlwy.net",
-        "PORT": "24059",
-    }
-}
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "railway",
+#         "USER": "postgres",
+#         "PASSWORD": "A6f6-1-edC-1a5bGf5Dg26Cf*gcAgfcd",
+#         "HOST": "roundhouse.proxy.rlwy.net",
+#         "PORT": "40373",
+#     }
+# }
 # kk
 
 # Password validation

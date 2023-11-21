@@ -34,3 +34,14 @@ class Colaborators(models.Model):
     3 cadereyta
     4 FX
     """
+
+
+class WhatsDetails(models.Model):
+    phone = models.IntegerField(verbose_name="Celular", default=0)
+    employee = models.IntegerField(
+        verbose_name="Employee ID", default=0, blank=True, null=True
+    )
+    ticket = models.TextField(verbose_name="Ticket", blank=True, null=True)
+
+    def __str__(self):
+        return self.phone

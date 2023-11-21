@@ -3,13 +3,14 @@ from curses.ascii import HT
 from django.views import View
 import json
 from django.http import JsonResponse, HttpResponse
-from .models import Colaborators
+from .models import Colaborators, WhatsDetails
 from django.db.models import Q
 import requests
 
 
 def sendWats(ticketQR, phone):
     url = f"http://ec2-18-205-238-236.compute-1.amazonaws.com:80/message/{phone}"
+    # url = f"http://localhost:7000/message/{phone}"
     data = {"imageBase64": ticketQR}
     try:
         response = requests.post(url, json=data)
@@ -70,11 +71,15 @@ class ColaboratorsView(View):
                 colaborator.asistencia = jd["location"]
                 colaborator.ticket = ticketQR
                 colaborator.asistencia = 1
+                colaborator.phone = jd["phone"]
                 colaborator.save()
                 whats_result = sendWats(ticketQR, phone)
                 if whats_result == 200:
                     return HttpResponse("ok", status=200)
                 else:
+                    WhatsDetails.objects.create(
+                        employee=jd["employee"], phone=jd["phone"], ticket=ticketQR
+                    )
                     return HttpResponse("bad", status=500)
             else:
                 return HttpResponse("forbidden", status=403)
@@ -92,6 +97,9 @@ class ColaboratorsView(View):
             if whats_result == 200:
                 return HttpResponse("ok", status=200)
             else:
+                WhatsDetails.objects.create(
+                    employee=jd["employee"], phone=jd["phone"], ticket=ticketQR
+                )
                 return HttpResponse("ok", status=500)
 
     def put(self, request):

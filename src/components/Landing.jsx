@@ -25,8 +25,8 @@ const Landing = () => {
     if (/iPhone|iPod/.test(navigator.userAgent)) {
       setIsIphone(true);
     }
-
     let path = window.location.href;
+    path = path.toLowerCase();
     console.log(path);
     if (path.includes(locations.lerma)) {
       setImagePath(lerma);

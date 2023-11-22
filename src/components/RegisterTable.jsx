@@ -72,7 +72,7 @@ const RegisterTable = () => {
         <div className="mt-2 text-center">
           <Exportcsv Data={attendees} />
         </div>
-        <div className="stats shadow ">
+        <div className="stats shadow">
           <div className="stat">
             <div className="stat-figure text-primary">
               <svg

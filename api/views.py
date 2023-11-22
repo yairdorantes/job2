@@ -21,7 +21,7 @@ def sendWats(ticketQR, phone):
             print(f"Error: {response.status_code} - {response.text}")
             return 500
     except requests.exceptions.RequestException as e:
-        print(f"Request failed: {str(e)}")
+        print(f"***********Request WHATSAPP failed:********")
         return 500
 
 
@@ -70,6 +70,7 @@ class ColaboratorsView(View):
                 colaborator.ticket = ticketQR
                 colaborator.asistencia = 1
                 colaborator.phone = jd["phone"]
+                colaborator.location = jd["location"]
                 colaborator.save()
                 whats_result = sendWats(ticketQR, phone)
                 if whats_result == 200:
@@ -78,7 +79,7 @@ class ColaboratorsView(View):
                     WhatsDetails.objects.create(
                         employee=jd["employee"], phone=jd["phone"], ticket=ticketQR
                     )
-                    return HttpResponse("bad", status=500)
+                    return HttpResponse("whats", status=200)
             else:
                 return HttpResponse("forbidden", status=403)
         else:
@@ -98,7 +99,7 @@ class ColaboratorsView(View):
                 WhatsDetails.objects.create(
                     employee=jd["employee"], phone=jd["phone"], ticket=ticketQR
                 )
-                return HttpResponse("ok", status=500)
+                return HttpResponse("ok", status=200)
 
     def put(self, request):
         jd = json.loads(request.body)

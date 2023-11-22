@@ -79,7 +79,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "jony.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 

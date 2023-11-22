@@ -44,4 +44,4 @@ class WhatsDetails(models.Model):
     ticket = models.TextField(verbose_name="Ticket", blank=True, null=True)
 
     def __str__(self):
-        return self.phone
+        return str(self.phone)

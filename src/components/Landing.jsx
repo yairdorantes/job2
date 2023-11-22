@@ -44,6 +44,9 @@ const Landing = () => {
     ) {
       setImagePath(division);
       changeLocation(4);
+    } else {
+      setImagePath(lerma);
+      changeLocation(1);
     }
   }, []);
 

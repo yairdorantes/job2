@@ -41,16 +41,16 @@ const Form = () => {
       .post(`${api}/colabs`, newColab)
       .then((res) => {
         setIsSent(true);
-
-        toast.success("Initación enviada con éxito!", { duration: 3000 });
+        toast.success(
+          "Invitación creada con éxito. Pronto recibirás un mensaje en tu WhatsApp",
+          { duration: 5000 }
+        );
       })
       .catch((err) => {
         console.log(err.response.status);
         if (err.response.status === 403) {
-          toast.error(
-            "Tu invitación ya ha sido enviada. Por favor, revisa tu bandeja de WhatsApp.",
-            { duration: 3000 }
-          );
+          toast.error("Tu invitación ya ha sido creada.", { duration: 3000 });
+          setIsSent(true);
         } else {
           toast.error("Ocurrio un error, intenta nuevamente", {
             duration: 3000,

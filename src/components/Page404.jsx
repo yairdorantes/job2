@@ -1,6 +1,12 @@
+import bg from "../media/quest.webp";
 const Page404 = () => {
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div
+      style={{
+        backgroundImage: `linear-gradient(rgba(4, 4, 4, 0.696), rgba(12, 12, 12, 0.77)), url(${bg})`,
+      }}
+      className="flex justify-center items-center h-screen min-h-screen bg-cover bg-center"
+    >
       <div className="text-center">
         <h1 className="mb-4 text-6xl font-semibold text-red-500">404</h1>
         <p className="mb-4 text-lg text-gray-100">
@@ -21,6 +27,7 @@ const Page404 = () => {
             ></path>
           </svg>
         </div>
+
         {/* <p className="mt-4 text-gray-600">
           Let's get you back{" "}
           <a href="/" className="text-blue-500">

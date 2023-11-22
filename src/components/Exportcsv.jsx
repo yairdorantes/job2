@@ -50,7 +50,7 @@ const Exportcsv = ({ Data = [] }) => {
     try {
       const editedData = Data.map((employee) => {
         const data = {
-          no_empleado: employee.employee,
+          empleado: employee.employee,
           nombre: replaceSpecialCharacter(employee.name),
           asistencia: attendaceDetail(employee.asistencia),
           area: valueIsEmpty(employee.area),

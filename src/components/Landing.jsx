@@ -9,7 +9,7 @@ import useStore from "../Context";
 import { locations } from "../api";
 
 const Landing = () => {
-  const { location, changeLocation } = useStore();
+  const { changeLocation } = useStore();
   const [isIphone, setIsIphone] = useState(false);
 
   const scrollToBottom = () => {

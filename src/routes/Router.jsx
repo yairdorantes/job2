@@ -4,7 +4,7 @@ import RegisterTable from "../components/RegisterTable";
 import QRScanner from "../components/QRScanner";
 import Csv from "../components/Csv";
 import Exportcsv from "../components/Exportcsv";
-
+import Page404 from "../components/Page404";
 const Router = () => {
   return (
     <Routes>
@@ -13,6 +13,7 @@ const Router = () => {
       <Route path="/scanner" element={<QRScanner />} />
       <Route path="/csv" element={<Csv />} />
       <Route path="/export" element={<Exportcsv />} />
+      <Route path="*" element={<Page404 />} />
     </Routes>
   );
 };

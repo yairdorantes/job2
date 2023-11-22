@@ -10,6 +10,7 @@ import { locations } from "../api";
 
 const Landing = () => {
   const { location, changeLocation } = useStore();
+  const [isIphone, setIsIphone] = useState(false);
 
   const scrollToBottom = () => {
     const content = document.getElementById("form-attendance");
@@ -21,6 +22,10 @@ const Landing = () => {
   };
   const [imagePath, setImagePath] = useState(lerma);
   useEffect(() => {
+    if (/iPhone|iPod/.test(navigator.userAgent)) {
+      setIsIphone(true);
+    }
+
     let path = window.location.href;
     console.log(path);
     if (path.includes(locations.lerma)) {
@@ -58,7 +63,9 @@ const Landing = () => {
           width: "100vw",
           backgroundImage: `url(${bg})`,
         }}
-        className="min-h-screen w-screen bg-scroll relative bg-cover bg-center flex flex-col items-center justify-center"
+        className={`min-h-screen w-screen ${
+          isIphone ? "bg-scroll" : "bg-fixed"
+        } relative bg-cover bg-center flex flex-col items-center justify-center`}
       >
         <div className=" mt-24">
           <img src={title} className="w-[450px]" alt="" />

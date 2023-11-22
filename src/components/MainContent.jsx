@@ -11,7 +11,7 @@ const MainContent = () => {
     <div
       className="min-h-screen relative bg-cover bg-center"
       style={{
-        // width: "100vw",
+        width: "100vw",
         backgroundImage: `url(${bg})`,
       }}
     >
@@ -29,7 +29,7 @@ const MainContent = () => {
         <Sec3 />
         <Form />
         <Snowfall
-          // images={images}
+          // images={images}npm
           color="#f6f8fbfc"
           speed={[0.5, 0.5]}
           radius={[2, 4]}

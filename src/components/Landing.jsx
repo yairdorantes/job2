@@ -58,7 +58,7 @@ const Landing = () => {
           width: "100vw",
           backgroundImage: `url(${bg})`,
         }}
-        className="min-h-screen w-screen bg-fixed relative bg-cover bg-center flex flex-col items-center justify-center"
+        className="min-h-screen w-screen bg-scroll relative bg-cover bg-center flex flex-col items-center justify-center"
       >
         <div className=" mt-24">
           <img src={title} className="w-[450px]" alt="" />

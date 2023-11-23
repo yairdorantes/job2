@@ -6,17 +6,20 @@ import toast from "react-hot-toast";
 import Modal from "./Modal";
 
 const QRScanner = () => {
-  const [code, setCode] = useState([""]);
+  const [code, setCode] = useState({
+    nombre: "",
+    celular: -1,
+    identificador: "",
+  });
   useEffect(() => {
     const videoElem = document.createElement("video");
     document.body.appendChild(videoElem);
     const qrScanner = new QrScanner(
       videoElem,
       (result) => {
-        // alert(JSON.stringify(result));
-        console.log("decoded qr code:", result);
-        const employeeData = result.data.split("|");
-        console.log(employeeData);
+        // console.log("decoded qr code:", result);
+        const employeeData = JSON.parse(result.data);
+        console.log(employeeData, "**");
         setCode(employeeData);
       },
       { highlightScanRegion: true }
@@ -29,10 +32,9 @@ const QRScanner = () => {
   }, []);
   const confirmAttendance = () => {
     try {
-      const NoEmployee = code[0].split(":")[1];
-      console.log(NoEmployee);
+      const employee = code["celular"];
       axios
-        .put(`${api}/colabs`, { employee: NoEmployee })
+        .put(`${api}/colabs`, { employee })
         .then((res) => {
           console.log("confirm successful");
           toast.success("Asistencia confirmada");
@@ -46,7 +48,7 @@ const QRScanner = () => {
           }
         })
         .finally(() => {
-          setCode([""]);
+          setCode({});
         });
     } catch (error) {
       toast.error("Ups algo salió mal");
@@ -54,15 +56,24 @@ const QRScanner = () => {
   };
   return (
     <div>
-      <Modal />
+      {/* <Modal /> */}
       <div className="max-w-lg h-[320px] mx-auto pt-24 text-center ">
-        <h1 className="text-lg animate-blink">Código escaneado:</h1>
-        <div className="font-bold h-28 mt-2 flex flex-col items-center justify-center">
-          {code[0].length > 0 ? (
-            <div>
-              <div className="">{code[0]}</div>
-              <div>{code[1]}</div>
-              <div>{code[2]}</div>
+        <h1 className="text-lg animate-blink font-semibold">
+          Código escaneado:
+        </h1>
+        <div className=" h-28  mt-2 flex flex-col items-center  justify-center">
+          {code["celular"] && code["celular"] > 0 ? (
+            <div className="flex flex-col gap-3">
+              <div>
+                Identificador:{" "}
+                <span className="font-bold">{code["identificador"]}</span>
+              </div>
+              <div className="">
+                Nombre: <span className="font-bold">{code["nombre"]}</span>
+              </div>
+              <div>
+                Celular: <span className="font-bold">{code["celular"]}</span>
+              </div>
             </div>
           ) : (
             <div role="status" className="max-w-sm animate-pulse">
@@ -72,11 +83,11 @@ const QRScanner = () => {
               <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
               <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
               <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
-              <span className="sr-only">Loading...</span>
+              {/* <span className="sr-only">Loading...</span> */}
             </div>
           )}
         </div>
-        {code[0].length > 0 && (
+        {code["celular"] && code["celular"] > 0 && (
           <div onClick={confirmAttendance} className="btn mt-5 btn-success ">
             Confirmar Asistencia
           </div>

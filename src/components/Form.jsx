@@ -21,8 +21,10 @@ const Form = () => {
   } = useForm();
   const onSubmit = async (data) => {
     const base64QR = await createQR(
-      `Identificador: ${data.employee} | Nombre: ${data.name} |`
+      `{"identificador":"${data.employee}","nombre": "${data.name}","celular":${data.phone}} `
     );
+    // const testing = `{"identificador":"${data.employee}","nombre": "${data.name}","celular":${data.phone}} `;
+    // console.log(JSON.parse(testing));
     const newColab = {
       employee: data.employee,
       name: data.name,
@@ -95,7 +97,7 @@ const Form = () => {
               </label>
               <input
                 {...register("employee", { required: true })}
-                type="number"
+                type="text"
                 className="mt-1 p-2 w-full border text-black font-bold bg-gray-200 rounded-md"
                 required
               />

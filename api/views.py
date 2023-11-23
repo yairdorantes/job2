@@ -47,6 +47,20 @@ class WhatsAppView(View):
             return HttpResponse("badass2", status=500)
 
 
+class HandleCsvData(View):
+    def post(self, request):
+        jd = json.loads(request.body)
+        Colaborators.objects.create(
+            employee=jd["employee"],
+            Noi=jd["noi"],
+            area=jd["area"],
+            name=jd["name"],
+            known=True,
+            location=2,
+        )
+        return HttpResponse("ok", 200)
+
+
 class ColaboratorsView(View):
     def get(self, request, location=0):
         if location > 0:
@@ -61,36 +75,48 @@ class ColaboratorsView(View):
         employee = jd["employee"]
         phone = jd["phone"]
         ticketQR = jd["ticket"]
-        colaborator = Colaborators.objects.filter(
-            Q(employee=employee) | Q(phone=phone)
-        ).first()
-        if colaborator:
-            if colaborator.ticket == "":
-                colaborator.asistencia = jd["location"]
-                colaborator.ticket = ticketQR
-                colaborator.asistencia = 1
-                colaborator.phone = jd["phone"]
-                colaborator.location = jd["location"]
-                colaborator.save()
-                whats_result = sendWats(ticketQR, phone)
+        colaborators = Colaborators.objects.filter(
+            Q(phone=phone) | Q(employee=employee) | Q(Noi=employee)
+        )
+        send_whats = False
+        whats_result = 0
+        if colaborators.exists():
+            print("found***")
+            for colab in colaborators:
+                if colab.asistencia < 1:
+                    print("modified****")
+                    send_whats = True
+                    colab.name = jd["name"]
+                    colab.ticket = ticketQR
+                    colab.asistencia = 1
+                    colab.phone = jd["phone"]
+                    colab.location = jd["location"]
+                    colab.save()
+                    whats_result = sendWats(ticketQR, phone)
+                    break
+            if send_whats:
+                print("whats send tried")
                 if whats_result == 200:
                     return HttpResponse("ok", status=200)
                 else:
                     WhatsDetails.objects.create(
                         employee=jd["employee"], phone=jd["phone"], ticket=ticketQR
                     )
-                    return HttpResponse("whats", status=200)
+                    return HttpResponse("whats_failure", status=200)
             else:
-                return HttpResponse("forbidden", status=403)
+                print("no need to send whats ")
+                return HttpResponse("already sent", status=200)
         else:
+            print("created")
             Colaborators.objects.create(
-                employee=jd["employee"],
+                employee=employee,
                 name=jd["name"],
                 phone=jd.get("phone", ""),
                 ticket=jd["ticket"],
                 email=jd.get("email", ""),
                 asistencia=1,
                 location=jd["location"],
+                known=False,
             )
             whats_result = sendWats(ticketQR, phone)
             if whats_result == 200:

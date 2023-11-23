@@ -20,18 +20,20 @@ const Form = () => {
     // formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
+    console.log(data);
     const base64QR = await createQR(
       `{"identificador":"${data.employee}","nombre": "${data.name}","celular":${data.phone}} `
     );
     // const testing = `{"identificador":"${data.employee}","nombre": "${data.name}","celular":${data.phone}} `;
     // console.log(JSON.parse(testing));
     const newColab = {
-      employee: data.employee,
+      // employee: data.employee,
       name: data.name,
       phone: data.phone,
       email: data.email,
       ticket: base64QR,
       location: location,
+      taxi: data.taxi === "yes" ? true : false,
     };
     console.log(newColab);
     // setEmployeeData(
@@ -91,7 +93,7 @@ const Form = () => {
             Confirma tu asistencia
           </h2>
           <form onSubmit={handleSubmit(onSubmit)} action="#" method="post">
-            <div className="mb-2">
+            {/* <div className="mb-2">
               <label htmlFor="name" className="block text-lg  text-white">
                 NOI o WEB:
               </label>
@@ -101,19 +103,18 @@ const Form = () => {
                 className="mt-1 p-2 w-full border text-black font-bold bg-gray-200 rounded-md"
                 required
               />
-            </div>
-            <div
-              onClick={() => document.getElementById("my_modal_2").showModal()}
-              className="link link-info text-sm"
-            >
-              ¿Como puedo conocer este dato?
-            </div>
+            </div> */}
+
             <div className="mb-4">
               <label htmlFor="name" className="block text-lg  text-white">
                 Nombre completo:
               </label>
               <input
-                {...register("name", { required: true })}
+                {...register("name", {
+                  required: true,
+                  minLength: 12,
+                  maxLength: 200,
+                })}
                 type="text"
                 className="mt-1 p-2 w-full border text-black font-bold bg-gray-200 rounded-md"
                 required
@@ -135,18 +136,52 @@ const Form = () => {
                 Numero de celular (WhatsApp):
               </label>
               <input
-                {...register("phone", { required: true })}
+                {...register("phone", { required: true, max: 999999 })}
                 type="number"
                 className="mt-1 p-2 w-full border text-black font-bold bg-gray-200 rounded-md"
                 required
+                placeholder="10 dígitos"
               />
+            </div>
+            <div className="mb-12">
+              <label htmlFor="name" className="block text-lg mb-2  text-white">
+                ¿Harías uso de taxi para tu traslado al evento?
+              </label>
+              <div className="flex justify-evenly  text-white font-bold">
+                <div className="flex items-center gap-1">
+                  <label htmlFor="option1">NO</label>
+                  <input
+                    type="radio"
+                    // data-theme="light"
+                    id="option1"
+                    name="radio-7"
+                    value="no"
+                    defaultChecked={true}
+                    className="radio radio-primary"
+                    {...register("taxi")}
+                    // checked
+                  />
+                </div>
+                <div className="flex items-center gap-1">
+                  <label htmlFor="option2">SI</label>
+                  <input
+                    type="radio"
+                    id="option2"
+                    defaultChecked={false}
+                    value="yes"
+                    name="radio-7"
+                    className="radio radio-primary"
+                    {...register("taxi")}
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="flex items-center justify-center">
               <button
                 type="submit"
                 disabled={isSent}
-                className="btn-chrismas mb-4"
+                className="btn-chrismas "
                 // mb-5
               >
                 {isSent && !isLoading ? (

@@ -22,7 +22,7 @@ const MainContent = () => {
 
       <Landing />
       <div className="mx-4">
-        <div className="text-black text-sm fixed bottom-2 z-10 opacity-80 right-2">
+        <div className="text-black text-xs fixed bottom-2 z-10 -translate-x-1/2 left-1/2 opacity-80 ">
           Powered By <span className="font-bold">Ecommerce Team</span>
         </div>
         <InvText />

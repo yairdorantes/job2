@@ -4,8 +4,18 @@ import axios from "axios";
 import { api } from "../api";
 import toast from "react-hot-toast";
 import Modal from "./Modal";
-
+import beep from "../media/beep.mp3";
 const QRScanner = () => {
+  const [audio] = useState(new Audio(beep));
+  const [isMounted, setIsMounted] = useState(true);
+
+  const playSound = () => {
+    if (isMounted) {
+      audio.play().catch((error) => {
+        console.error("Error playing sound:", error);
+      });
+    }
+  };
   const [code, setCode] = useState({
     nombre: "",
     celular: -1,
@@ -20,6 +30,8 @@ const QRScanner = () => {
         // console.log("decoded qr code:", result);
         const employeeData = JSON.parse(result.data);
         console.log(employeeData, "**");
+        playSound();
+
         setCode(employeeData);
       },
       { highlightScanRegion: true }
@@ -30,6 +42,14 @@ const QRScanner = () => {
       document.body.removeChild(videoElem);
     };
   }, []);
+  useEffect(() => {
+    setIsMounted(true);
+    return () => {
+      setIsMounted(false);
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, [audio]);
   const confirmAttendance = () => {
     try {
       const employee = code["celular"];

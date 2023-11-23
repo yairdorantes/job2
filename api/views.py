@@ -1,3 +1,4 @@
+import email
 from django.views import View
 import json
 from django.http import JsonResponse, HttpResponse
@@ -73,60 +74,89 @@ class ColaboratorsView(View):
 
     def post(self, request):
         jd = json.loads(request.body)
-        employee = jd["employee"]
+        # employee = jd["employee"]
         phone = jd["phone"]
         ticketQR = jd["ticket"]
-        colaborators = Colaborators.objects.filter(
-            Q(phone=phone) | Q(employee=employee) | Q(Noi=employee)
-        )
-        send_whats = False
-        whats_result = 0
-        if colaborators.exists():
-            print("found***")
-            for colab in colaborators:
-                if colab.asistencia < 1:
-                    print("modified****")
-                    send_whats = True
-                    colab.name = jd["name"]
-                    colab.ticket = ticketQR
-                    colab.asistencia = 1
-                    colab.phone = jd["phone"]
-                    colab.location = jd["location"]
-                    colab.save()
-                    whats_result = sendWats(ticketQR, phone)
-                    break
-            if send_whats:
-                print("whats send tried")
-                if whats_result == 200:
-                    return HttpResponse("ok", status=200)
-                else:
-                    WhatsDetails.objects.create(
-                        employee=jd["employee"], phone=jd["phone"], ticket=ticketQR
-                    )
-                    return HttpResponse("whats_failure", status=200)
-            else:
-                print("no need to send whats ")
-                return HttpResponse("already sent", status=200)
+        colaborator = Colaborators.objects.filter(phone=phone).first()
+        if colaborator:
+            return HttpResponse("forbidden", status=403)
         else:
-            print("created")
             Colaborators.objects.create(
-                employee=employee,
+                phone=phone,
+                ticket=ticketQR,
                 name=jd["name"],
-                phone=jd.get("phone", ""),
-                ticket=jd["ticket"],
-                email=jd.get("email", ""),
+                email=jd["email"],
                 asistencia=1,
                 location=jd["location"],
-                known=False,
+                taxi=jd["taxi"],
             )
             whats_result = sendWats(ticketQR, phone)
             if whats_result == 200:
-                return HttpResponse("ok", status=200)
+                return HttpResponse("success", status=200)
             else:
-                WhatsDetails.objects.create(
-                    employee=jd["employee"], phone=jd["phone"], ticket=ticketQR
-                )
+                WhatsDetails.objects.create(phone=jd["phone"], ticket=ticketQR)
                 return HttpResponse("ok", status=200)
+
+    def delete(self, request):
+        jd = json.loads(request.body)
+        colabs = jd["list_colabs"]
+        print(colabs, "***********************")
+        for colab_id in colabs:
+            Colaborators.objects.filter(id=colab_id).delete()
+        return HttpResponse("success", status=200)
+
+        # colaborators = Colaborators.objects.filter(
+        #     Q(phone=phone) | Q(employee=employee) | Q(Noi=employee)
+        # )
+        # send_whats = False
+        # whats_result = 0
+        # if colaborators.exists():
+        #     print("found***")
+        #     for colab in colaborators:
+        #         if colab.asistencia < 1:
+        #             print("modified****")
+        #             send_whats = True
+        #             colab.name = jd["name"]
+        #             colab.ticket = ticketQR
+        #             # jaajk
+        #             colab.asistencia = 1
+        #             colab.phone = jd["phone"]
+        #             colab.location = jd["location"]
+        #             colab.save()
+        #             whats_result = sendWats(ticketQR, phone)
+        #             break
+        #     if send_whats:
+        #         print("whats send tried")
+        #         if whats_result == 200:
+        #             return HttpResponse("ok", status=200)
+        #         else:
+        #             WhatsDetails.objects.create(
+        #                 employee=jd["employee"], phone=jd["phone"], ticket=ticketQR
+        #             )
+        #             return HttpResponse("whats_failure", status=200)
+        #     else:
+        #         print("no need to send whats ")
+        #         return HttpResponse("already sent", status=200)
+        # else:
+        #     print("created")
+        #     Colaborators.objects.create(
+        #         employee=employee,
+        #         name=jd["name"],
+        #         phone=jd.get("phone", ""),
+        #         ticket=jd["ticket"],
+        #         email=jd.get("email", ""),
+        #         asistencia=1,
+        #         location=jd["location"],
+        #         known=False,
+        #     )
+        #     whats_result = sendWats(ticketQR, phone)
+        #     if whats_result == 200:
+        #         return HttpResponse("ok", status=200)
+        #     else:
+        #         WhatsDetails.objects.create(
+        #             employee=jd["employee"], phone=jd["phone"], ticket=ticketQR
+        #         )
+        #         return HttpResponse("ok", status=200)
 
     def put(self, request):
         jd = json.loads(request.body)

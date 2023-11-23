@@ -27,6 +27,7 @@ class Colaborators(models.Model):
     email = models.EmailField(default="example@example.com", verbose_name="Email")
     ticket = models.TextField(verbose_name="Ticket", blank=True, null=True)
     known = models.BooleanField(verbose_name="Known", default=False)
+    taxi = models.BooleanField(verbose_name="Taxi", default=False)
 
     def __str__(self):
         return self.name

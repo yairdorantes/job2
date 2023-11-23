@@ -67,7 +67,8 @@ class ColaboratorsView(View):
             colaborators = list(Colaborators.objects.filter(location=location).values())
             return JsonResponse({"colabs": list(colaborators)})
         else:
-            colaborators = Colaborators.objects.values().order_by("-asistencia")
+            colaborators = Colaborators.objects.values()
+            print(list(colaborators)[0]["asistencia"])
             return JsonResponse({"colabs": list(colaborators)})
 
     def post(self, request):
@@ -130,7 +131,7 @@ class ColaboratorsView(View):
     def put(self, request):
         jd = json.loads(request.body)
         employee = jd["employee"]
-        colaborator = Colaborators.objects.filter(Q(employee=employee)).first()
+        colaborator = Colaborators.objects.filter(Q(phone=employee)).first()
         if colaborator:
             colaborator.asistencia = 2
             colaborator.save()

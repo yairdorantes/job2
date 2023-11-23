@@ -18,7 +18,10 @@ const RegisterTable = () => {
       .get(`${api}/colabs/${location}`)
       .then((res) => {
         console.log(res);
-        setAttendees(res.data.colabs);
+        const sortedColabs = res.data.colabs.sort(
+          (a, b) => b.asistencia - a.asistencia
+        );
+        setAttendees(sortedColabs);
         res.data.colabs.forEach((item) => {
           if (item.asistencia === 0) {
             pending += 1;

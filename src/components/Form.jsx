@@ -22,7 +22,7 @@ const Form = () => {
   const onSubmit = async (data) => {
     console.log(data);
     const base64QR = await createQR(
-      `{"identificador":"${data.employee}","nombre": "${data.name}","celular":${data.phone}} `
+      `{"nombre": "${data.name}","celular":${data.phone}} `
     );
     // const testing = `{"identificador":"${data.employee}","nombre": "${data.name}","celular":${data.phone}} `;
     // console.log(JSON.parse(testing));

@@ -1,4 +1,3 @@
-import email
 from django.views import View
 import json
 from django.http import JsonResponse, HttpResponse
@@ -6,6 +5,7 @@ from .models import Colaborators, WhatsDetails
 from django.db.models import Q
 import requests
 from ipware import get_client_ip
+import uuid
 
 
 def sendWats(ticketQR, phone):
@@ -51,8 +51,10 @@ class WhatsAppView(View):
 
 class HandleCsvData(View):
     def get(self, request):
-        client_ip, is_routable = get_client_ip(request)
-        print(client_ip)
+        client_ip = request.META.get("REMOTE_ADDR", None)
+        # Print or use the client IP address as needed
+        print(f"Client IP Address: {client_ip}")
+        # Use the unique identifier and/or IP address to identify the device
         return HttpResponse("ok", status=200)
 
     def post(self, request):

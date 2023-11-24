@@ -51,14 +51,10 @@ class WhatsAppView(View):
 
 class HandleCsvData(View):
     def get(self, request):
-        ip = request.META.get("HTTP_X_FORWARDED_FOR", None)
-        if ip:
-            # X_FORWARDED_FOR returns client1, proxy1, proxy2,...
-            ip = ip.split(", ")[0]
-        else:
-            ip = request.META.get("REMOTE_ADDR", "")
-        print("my ip", ip)
-
+        ip = request.META.get("HTTP_CF_CONNECTING_IP")
+        if ip is None:
+            ip = request.META.get("REMOTE_ADDR")
+        print(ip, "ippp")
         return HttpResponse("ok", status=200)
 
     def post(self, request):

@@ -22,7 +22,7 @@ class Colaborators(models.Model):
         verbose_name="Planta", default=0, blank=True, null=True
     )
 
-    phone = models.IntegerField(verbose_name="Celular", default=0)
+    phone = models.BigIntegerField(verbose_name="Celular", default=0)
     asistencia = models.IntegerField(default=0, verbose_name="Asistencia")
     email = models.EmailField(default="example@example.com", verbose_name="Email")
     ticket = models.TextField(verbose_name="Ticket", blank=True, null=True)

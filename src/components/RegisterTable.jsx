@@ -16,7 +16,6 @@ const RegisterTable = () => {
   const [peopleTaxi, setPeopleTaxi] = useState(0);
   const [attendingS, setAttendingS] = useState(0);
   const { list, toggleList } = useToggleList();
-
   const [locationID, setLocationID] = useState(0);
   const getAttendees = (location = 0) => {
     let attending = 0,
@@ -128,7 +127,7 @@ const RegisterTable = () => {
         <div className="mt-2 text-center">
           <Exportcsv Data={attendees} />
         </div>
-        <div className="stats shadow w-lg sm:w-auto overflow-x-auto">
+        <div className="stats shadow w-[24rem]  sm:w-3/4">
           <div className="stat">
             <div className="stat-figure text-primary">
               <svg
@@ -264,13 +263,14 @@ const RegisterTable = () => {
                 {/* <th>Area</th> */}
                 <th className="">Asistencia</th>
                 <th>Taxi</th>
+                <th>Celular</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               {attendees.map((colab, i) => (
                 <tr key={i}>
-                  <th>{colab.name}</th>
+                  <td>{colab.name}</td>
                   <td className="">
                     <div
                       data-theme="dark"
@@ -301,6 +301,7 @@ const RegisterTable = () => {
                   {/* <td>{replaceSpecialCharacter(colab.name)}</td> */}
                   {/* <td>{colab.position === "" ? "S/D" : colab.position}</td> */}
                   {/* <td>{colab.area === "" ? "S/D" : colab.area}</td> */}
+
                   <td>
                     {colab.taxi ? (
                       <svg
@@ -329,6 +330,7 @@ const RegisterTable = () => {
                       </svg>
                     )}
                   </td>
+                  <td>{colab.phone}</td>
                   <th>
                     <div
                       onClick={() => toggleList(colab.id)}

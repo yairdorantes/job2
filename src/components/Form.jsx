@@ -3,7 +3,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { api } from "../api";
 import TimeLine from "./TimeLine";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createQR } from "./CreateQR";
 import useStore from "../Context";
 
@@ -44,7 +44,9 @@ const Form = () => {
     axios
       .post(`${api}/colabs`, newColab)
       .then((res) => {
+        localStorage.setItem("ticket", "yes");
         setIsSent(true);
+
         toast.success(
           "Invitación creada con éxito. Pronto recibirás un mensaje en tu WhatsApp",
           { duration: 5000 }
@@ -63,6 +65,12 @@ const Form = () => {
       })
       .finally(() => setIsLoading(false));
   };
+
+  useEffect(() => {
+    const ticket = localStorage.getItem("ticket");
+    ticket === "yes" && setIsSent(true);
+  }, []);
+
   return (
     <section
       id="form-attendance"
@@ -136,47 +144,51 @@ const Form = () => {
                 Numero de celular (WhatsApp):
               </label>
               <input
-                {...register("phone", { required: true, max: 999999 })}
+                {...register("phone", { required: true, max: 9999999999 })}
                 type="number"
                 className="mt-1 p-2 w-full border text-black font-bold bg-gray-200 rounded-md"
                 required
                 placeholder="10 dígitos"
               />
             </div>
-            <div className="mb-12">
-              <label htmlFor="name" className="block text-lg mb-2  text-white">
-                ¿Harías uso de taxi para tu traslado al evento?
-              </label>
-              <div className="flex justify-evenly  text-white font-bold">
-                <div className="flex items-center gap-1">
-                  <label htmlFor="option1">NO</label>
-                  <input
-                    type="radio"
-                    // data-theme="light"
-                    id="option1"
-                    name="radio-7"
-                    value="no"
-                    defaultChecked={true}
-                    className="radio radio-primary"
-                    {...register("taxi")}
-                    // checked
-                  />
-                </div>
-                <div className="flex items-center gap-1">
-                  <label htmlFor="option2">SI</label>
-                  <input
-                    type="radio"
-                    id="option2"
-                    defaultChecked={false}
-                    value="yes"
-                    name="radio-7"
-                    className="radio radio-primary"
-                    {...register("taxi")}
-                  />
+            {location === 1 && (
+              <div className="mb-12">
+                <label
+                  htmlFor="name"
+                  className="block text-lg mb-2  text-white"
+                >
+                  ¿Harías uso de taxi para tu traslado al evento?
+                </label>
+                <div className="flex justify-evenly  text-white font-bold">
+                  <div className="flex items-center gap-1">
+                    <label htmlFor="option1">NO</label>
+                    <input
+                      type="radio"
+                      // data-theme="light"
+                      id="option1"
+                      name="radio-7"
+                      value="no"
+                      defaultChecked={true}
+                      className="radio radio-primary"
+                      {...register("taxi")}
+                      // checked
+                    />
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <label htmlFor="option2">SI</label>
+                    <input
+                      type="radio"
+                      id="option2"
+                      defaultChecked={false}
+                      value="yes"
+                      name="radio-7"
+                      className="radio radio-primary"
+                      {...register("taxi")}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-
+            )}
             <div className="flex items-center justify-center">
               <button
                 type="submit"

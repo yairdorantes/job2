@@ -4,8 +4,6 @@ from django.http import JsonResponse, HttpResponse
 from .models import Colaborators, WhatsDetails
 from django.db.models import Q
 import requests
-from ipware import get_client_ip
-import uuid
 
 
 def sendWats(ticketQR, phone):
@@ -73,6 +71,33 @@ class HandleCsvData(View):
             location=2,
         )
         return HttpResponse("ok", 200)
+
+
+class HandleAdminActions(View):
+    def post(self, request):
+        jd = json.loads(request.body)
+        qr = jd["qr"]
+        wasa = jd["wasa"]
+        phone = jd.get("phone", 0)
+        employee = Colaborators.objects.filter(phone=phone).first()
+        if not employee:
+            Colaborators.objects.create(
+                name=jd["name"],
+                phone=phone,
+                asistencia=jd["asistencia"],
+                taxi=jd["taxi"],
+                location=jd["location"],
+            )
+            if wasa == True:
+                whats_res = sendWats(qr, phone)
+                if whats_res == 200:
+                    return HttpResponse("ok", status=200)
+                else:
+                    WhatsDetails.objects.create(phone=phone, ticket=qr)
+                    return HttpResponse("oki", status=200)
+            return HttpResponse("OK", status=200)
+        else:
+            return HttpResponse("forbiden", status=403)
 
 
 class ColaboratorsView(View):

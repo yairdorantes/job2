@@ -28,6 +28,7 @@ class Colaborators(models.Model):
     ticket = models.TextField(verbose_name="Ticket", blank=True, null=True)
     known = models.BooleanField(verbose_name="Known", default=False)
     taxi = models.BooleanField(verbose_name="Taxi", default=False)
+    # clients_ip=cha
 
     def __str__(self):
         return self.name

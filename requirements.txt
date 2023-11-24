@@ -20,3 +20,4 @@ whitenoise==6.2.0
 # openai==0.26.0
 python-dotenv==0.21.0
 requests==2.31.0
+django-ipware==6.0.0

@@ -6,10 +6,13 @@ import Exportcsv from "./Exportcsv";
 import ModalAdd from "./ModalAdd";
 import { useToggleList } from "../myHooks/ListToogle";
 import toast from "react-hot-toast";
+import useStore from "../Context";
+
 // import bg from "../media/bglex.jpg";
 const RegisterTable = () => {
   const [attendees, setAttendees] = useState([]);
   const [pendingS, setPendingS] = useState(0);
+  const { changeLocation } = useStore();
 
   const [confirmS, setConfirmS] = useState(0);
   const [taxis, setTaxis] = useState(0);
@@ -78,19 +81,23 @@ const RegisterTable = () => {
     if (path.includes(locations.lerma)) {
       locationID = 1;
       setLocationID(1);
+      changeLocation(1);
     } else if (
       path.includes(locations.santiago) | path.includes(locations.cruz)
     ) {
       locationID = 2;
       setLocationID(2);
+      changeLocation(2);
     } else if (path.includes(locations.cadereyta)) {
       setLocationID(3);
       locationID = 3;
+      changeLocation(3);
     } else if (
       path.includes(locations.division) | path.includes(locations.fx)
     ) {
       locationID = 4;
       setLocationID(4);
+      changeLocation(4);
     }
     getAttendees(locationID);
   }, []);
@@ -98,7 +105,7 @@ const RegisterTable = () => {
   return (
     <div className="">
       {/* <Modal /> */}
-      <ModalAdd />
+      <ModalAdd getData={getAttendees} />
       {/* Open the modal using document.getElementById('ID').showModal() method */}
       <div id="">
         <dialog id="my_modal_4" className="modal">

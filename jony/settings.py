@@ -58,7 +58,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    "django.middleware.security.SecurityMiddleware",
 ]
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_BROWSER_XSS_FILTER = True

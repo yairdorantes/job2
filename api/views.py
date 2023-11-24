@@ -57,10 +57,10 @@ class HandleCsvData(View):
         else:
             # If not behind a proxy, use REMOTE_ADDR
             client_ip = request.META.get("REMOTE_ADDR", None)
+        print(f"Client IP Address: {client_ip}")
         return HttpResponse("ok", status=200)
 
         # Print or use the client IP address as needed
-        print(f"Client IP Address: {client_ip}")
 
     def post(self, request):
         jd = json.loads(request.body)

@@ -104,7 +104,7 @@ const RegisterTable = () => {
 
   return (
     <div className="">
-      {/* <Modal /> */}
+      <Modal />
       <ModalAdd getData={getAttendees} />
       {/* Open the modal using document.getElementById('ID').showModal() method */}
       <div id="">

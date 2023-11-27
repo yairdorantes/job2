@@ -76,7 +76,7 @@ const QRScanner = () => {
   };
   return (
     <div>
-      {/* <Modal /> */}
+      <Modal />
       <div className="max-w-lg h-[320px] mx-auto pt-24 text-center ">
         <h1 className="text-lg animate-blink font-semibold">
           Código escaneado:

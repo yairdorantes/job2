@@ -5,7 +5,6 @@ const Sec3 = () => {
   const { location } = useStore();
   const [locationMaps, setLocationMaps] = useState("");
   console.log(location);
-  useState;
   // useEffect(() => {
   //   if (location === 4 || location === 1) {
   //     setLocationMaps(
@@ -16,13 +15,13 @@ const Sec3 = () => {
   //   }
   // }, [location]);
   return (
-    <section id="sec3" className="mt-24  mx-auto">
+    <section className="mt-24  mx-auto">
       <div className="text-center  mb-8 text-red-600 font-Paragraph font-bold text-2xl">
         <div className=" font-monsterrat">Ubicación</div>
         {/* <hr className="h-10  text-black w-10 "/> */}
         <div className="border-t border-1 border-red-500 my-1 w-20 mx-auto"></div>
       </div>
-      <div className="sm:w-1/2 w-lg mx-auto">
+      <div id="sec3" className="sm:w-1/2 w-lg mx-auto">
         {location === 2 && (
           <iframe
             className="w-full h-[400px] rounded-sm"

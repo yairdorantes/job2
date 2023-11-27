@@ -12,14 +12,6 @@ const InvText = () => {
       "22 de diciembre de 2023 a las 15:00 hrs. en el salón “Jardín Buenavista”, ubicado en Buenavista, San Mateo Atenco.",
     confirmation: "Confirma tu asistencia antes del 11 de diciembre de 2023.",
   });
-  const scrollToMap = () => {
-    const content = document.getElementById("sec3");
-    content.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "nearest",
-    });
-  };
 
   useEffect(() => {
     if (location === 4) {
@@ -67,14 +59,16 @@ const InvText = () => {
               hacemos la cordial invitación para asistir a nuestra celebración
               de fin de año, en agradecimiento a su entera colaboración,
               dedicación y esfuerzo, el{" "}
-              <span className="font-bold link" onClick={scrollToMap}>
-                {bodyText.location}
-              </span>
+              <span className="font-semibold">{bodyText.location}</span>
             </p>{" "}
             <p>{bodyText.confirmation}</p>
             <p>
-              ¡Feliz año nuevo para ti y tus seres queridos! Eres una pieza
-              invaluable para el equipo American Cotton.
+              ¡Feliz año nuevo para ti y tus seres queridos!{" "}
+              {location === 2 && (
+                <span>
+                  Eres una pieza invaluable para el equipo American Cotton.
+                </span>
+              )}
             </p>
             <p className="mt-6">
               <span className="font-bold">Cordialmente:</span>
@@ -91,7 +85,6 @@ const InvText = () => {
           />
         </div>
       </div>
-
       <div className="max-w-lg mx-auto text-black"></div>
     </section>
   );

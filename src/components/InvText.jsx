@@ -44,7 +44,6 @@ const InvText = () => {
     } else if (location === 3) {
     }
   }, [location]);
-
   return (
     <section className="mt-20">
       <div className="flex gap-10 flex-col justify-center items-center">

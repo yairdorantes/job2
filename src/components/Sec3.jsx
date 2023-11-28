@@ -34,10 +34,19 @@ const Sec3 = () => {
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         )}
-        {(location === 1 || location === 4) && (
+        {location === 1 && (
           <iframe
             className="w-full h-[400px] rounded-sm"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3766.1894654567823!2d-99.5386424!3d19.274125200000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cdf5299fb9169d%3A0xdb9ebb6dcb2ebe19!2sJard%C3%ADn%20de%20Fiestas%20Buenavista!5e0!3m2!1ses-419!2smx!4v1701104039602!5m2!1ses-419!2smx"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3766.1894654567823!2d-99.5386424!3d19.274125200000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cdf5299fb9169d%3A0xdb9ebb6dcb2ebe19!2sJard%C3%ADn%20de%20Fiestas%20Buenavista!5e0!3m2!1ses-419!2smx!4v1701187859507!5m2!1ses-419!2smx"
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        )}
+        {location === 4 && (
+          <iframe
+            className="w-full h-[400px] rounded-sm"
+            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3766.7620040334996!2d-99.53564962479028!3d19.249201381991366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTnCsDE0JzU3LjEiTiA5OcKwMzEnNTkuMSJX!5e0!3m2!1ses!2smx!4v1701187020958!5m2!1ses!2smx"
             allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

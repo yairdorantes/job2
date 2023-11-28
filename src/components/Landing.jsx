@@ -9,7 +9,7 @@ import useStore from "../Context";
 import { locations } from "../api";
 
 const Landing = () => {
-  const { changeLocation } = useStore();
+  const { changeLocation, location } = useStore();
   const [isIphone, setIsIphone] = useState(false);
 
   const scrollToBottom = () => {
@@ -73,14 +73,16 @@ const Landing = () => {
         <div className=" mt-24">
           <img src={title} className="w-[450px]" alt="" />
         </div>
-        <div className="mt-10 text-center">
-          <button
-            onClick={scrollToBottom}
-            className="font-cinzel btn-chrismas1"
-          >
-            Confirmar Asistencia
-          </button>
-        </div>
+        {location !== 3 && (
+          <div className="mt-10 text-center">
+            <button
+              onClick={scrollToBottom}
+              className="font-cinzel btn-chrismas1"
+            >
+              Confirmar Asistencia
+            </button>
+          </div>
+        )}
         <div className=""></div>
       </div>
       <div className="custom-shape-divider-bottom-1700083642">

@@ -42,6 +42,13 @@ const InvText = () => {
           "Confirma tu asistencia antes del 30 de noviembre de 2023.",
       });
     } else if (location === 3) {
+      setBodyText({
+        company: "American Cotton",
+        end: "Departamento de Recursos Humanos.",
+        location:
+          "18 de diciembre de 2023 a las 11:30 hrs.en las instalaciones de la Planta Cadereyta.",
+        confirmation: "",
+      });
     }
   }, [location]);
   return (

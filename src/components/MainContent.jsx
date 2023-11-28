@@ -5,7 +5,10 @@ import Landing from "./Landing";
 import InvText from "./InvText";
 import Sec3 from "./Sec3";
 import { motion, useScroll } from "framer-motion";
+import useStore from "../Context";
 const MainContent = () => {
+  const { location } = useStore();
+
   const { scrollYProgress } = useScroll();
   return (
     <div
@@ -26,7 +29,7 @@ const MainContent = () => {
           Powered By <span className="font-bold">Ecommerce Team</span>
         </div>
         <InvText />
-        <Sec3 />
+        {location !== 3 && <Sec3 />}
         <Form />
         <Snowfall
           // images={images}npm

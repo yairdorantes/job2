@@ -19,6 +19,21 @@ const TimeLine = () => {
         { time: "4:30 PM", title: "1°Ronda de rifa" },
         { time: "6:30 PM", title: "2°Ronda de rifa" },
       ]);
+    } else if (location === 1) {
+      setTimes([
+        { time: "3:00 PM", title: "Recepción" },
+        { time: "3:00 PM - 4:30 PM", title: "Comida" },
+        { time: "5:00 PM", title: "1° Rifa" },
+        { time: "6:00 PM", title: "2° Rifa" },
+      ]);
+    } else if (location === 4) {
+      setTimes([
+        { time: "3:00 PM", title: "Recepción" },
+        { time: "3:00 PM - 4:30 PM", title: "Comida" },
+        { time: "4:30 PM", title: "Entrega de reconocimientos" },
+        { time: "5:00 PM", title: "1° Rifa" },
+        { time: "6:00 PM", title: "2° Rifa" },
+      ]);
     }
   }, [location]);
 

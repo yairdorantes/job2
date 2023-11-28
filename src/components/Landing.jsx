@@ -37,7 +37,7 @@ const Landing = () => {
       setImagePath(ss);
       changeLocation(2);
     } else if (path.includes(locations.cadereyta)) {
-      setImagePath(cadereyta);
+      setImagePath(division);
       changeLocation(3);
     } else if (
       path.includes(locations.division) | path.includes(locations.fx)

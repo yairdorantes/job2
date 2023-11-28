@@ -43,7 +43,7 @@ const InvText = () => {
       });
     } else if (location === 3) {
       setBodyText({
-        company: "American Cotton",
+        company: "División FX",
         end: "Departamento de Recursos Humanos.",
         location:
           "18 de diciembre de 2023 a las 11:30 hrs.en las instalaciones de la Planta Cadereyta.",

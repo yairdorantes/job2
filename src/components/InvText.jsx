@@ -39,7 +39,7 @@ const InvText = () => {
         location:
           "12 de diciembre de 2023 a las 14:00 hrs. en el salón “Vicky´s”, ubicado en Ron de Hank, Prolongación, Don Catarino González Benítez, Colonia Guadalupe, 52600 Santiago Tianguistenco, Méx.",
         confirmation:
-          "Confirma tu asistencia antes del 30 de noviembre de 2023.",
+          "Confirma tu asistencia antes del 8 de diciembre de 2023.",
       });
     } else if (location === 3) {
       setBodyText({

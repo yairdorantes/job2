@@ -12,7 +12,7 @@ import useStore from "../Context";
 const RegisterTable = () => {
   const [attendees, setAttendees] = useState([]);
   const [pendingS, setPendingS] = useState(0);
-  const { changeLocation } = useStore();
+  const { changeLocation, location } = useStore();
 
   const [confirmS, setConfirmS] = useState(0);
   const [taxis, setTaxis] = useState(0);
@@ -131,6 +131,7 @@ const RegisterTable = () => {
       </div>
 
       <div className="w-lg sm:w-10/12 mx-auto mt-10 ">
+        {/* {<div>jaajajaj{locsation}</div>} */}
         <div className="mt-2 text-center">
           <Exportcsv Data={attendees} />
         </div>
@@ -187,7 +188,7 @@ const RegisterTable = () => {
             <div className="stat-value text-info">{confirmS}</div>
             {/* <div className="stat-desc">21% more than last month</div> */}
           </div>
-          <div className="stat">
+       {location===1&&   <div className="stat">
             <div className="stat-figure text-warning">
               <svg
                 viewBox="0 0 20 20"
@@ -201,7 +202,7 @@ const RegisterTable = () => {
             <div className="stat-title text-gray-100">Taxis</div>
             <div className="stat-value text-warning">{taxis}</div>
             <div className="stat-desc text-white">{peopleTaxi} personas</div>
-          </div>
+          </div>}
           {/* <div className="stat">
             <div className="stat-figure text-error">
               <svg
@@ -269,7 +270,7 @@ const RegisterTable = () => {
                 {/* <th>Puesto</th> */}
                 {/* <th>Area</th> */}
                 <th className="">Asistencia</th>
-                <th>Taxi</th>
+                {location === 1 && <th>Taxi</th>}
                 <th>Celular</th>
                 <th>Acciones</th>
               </tr>
@@ -309,34 +310,36 @@ const RegisterTable = () => {
                   {/* <td>{colab.position === "" ? "S/D" : colab.position}</td> */}
                   {/* <td>{colab.area === "" ? "S/D" : colab.area}</td> */}
 
-                  <td>
-                    {colab.taxi ? (
-                      <svg
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                        height="1em"
-                        width="1em"
-                        className="w-7 h-7 text-success"
-                      >
-                        <path d="M10.97 4.97a.75.75 0 011.07 1.05l-3.99 4.99a.75.75 0 01-1.08.02L4.324 8.384a.75.75 0 111.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 01.02-.022z" />
-                      </svg>
-                    ) : (
-                      <svg
-                        fill="none"
-                        viewBox="0 0 15 15"
-                        height="1em"
-                        width="1em"
-                        className="w-7 h-7 text-error"
-                      >
-                        <path
+                  {location === 1 && (
+                    <td>
+                      {colab.taxi ? (
+                        <svg
                           fill="currentColor"
-                          fillRule="evenodd"
-                          d="M11.782 4.032a.575.575 0 10-.813-.814L7.5 6.687 4.032 3.218a.575.575 0 00-.814.814L6.687 7.5l-3.469 3.468a.575.575 0 00.814.814L7.5 8.313l3.469 3.469a.575.575 0 00.813-.814L8.313 7.5l3.469-3.468z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    )}
-                  </td>
+                          viewBox="0 0 16 16"
+                          height="1em"
+                          width="1em"
+                          className="w-7 h-7 text-success"
+                        >
+                          <path d="M10.97 4.97a.75.75 0 011.07 1.05l-3.99 4.99a.75.75 0 01-1.08.02L4.324 8.384a.75.75 0 111.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 01.02-.022z" />
+                        </svg>
+                      ) : (
+                        <svg
+                          fill="none"
+                          viewBox="0 0 15 15"
+                          height="1em"
+                          width="1em"
+                          className="w-7 h-7 text-error"
+                        >
+                          <path
+                            fill="currentColor"
+                            fillRule="evenodd"
+                            d="M11.782 4.032a.575.575 0 10-.813-.814L7.5 6.687 4.032 3.218a.575.575 0 00-.814.814L6.687 7.5l-3.469 3.468a.575.575 0 00.814.814L7.5 8.313l3.469 3.469a.575.575 0 00.813-.814L8.313 7.5l3.469-3.468z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      )}
+                    </td>
+                  )}
                   <td>{colab.phone}</td>
                   <th>
                     <div

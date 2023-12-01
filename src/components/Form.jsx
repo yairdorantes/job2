@@ -58,9 +58,12 @@ const Form = () => {
           toast.error("Tu invitación ya ha sido creada.", { duration: 3000 });
           setIsSent(true);
         } else {
-          toast.error("Ocurrio un error, intenta nuevamente", {
-            duration: 3000,
-          });
+          toast.error(
+            "Ocurrio un error, intenta nuevamente, si el error persiste intenta más tarde",
+            {
+              duration: 3000,
+            }
+          );
         }
       })
       .finally(() => setIsLoading(false));

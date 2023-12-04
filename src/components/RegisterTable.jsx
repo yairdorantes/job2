@@ -13,8 +13,9 @@ const RegisterTable = () => {
   const [attendees, setAttendees] = useState([]);
   const [pendingS, setPendingS] = useState(0);
   const { changeLocation, location } = useStore();
-
+  // const [query, setQuery] = useState("");
   const [confirmS, setConfirmS] = useState(0);
+  const [filteredData, setFilteredData] = useState([]);
   const [taxis, setTaxis] = useState(0);
   const [peopleTaxi, setPeopleTaxi] = useState(0);
   const [attendingS, setAttendingS] = useState(0);
@@ -33,6 +34,7 @@ const RegisterTable = () => {
           (a, b) => b.asistencia - a.asistencia
         );
         setAttendees(sortedColabs);
+        setFilteredData(sortedColabs);
         res.data.colabs.forEach((item) => {
           console.log(item.taxi);
           item.taxi && cabs++;
@@ -70,6 +72,16 @@ const RegisterTable = () => {
         document.getElementById("my_modal_4").close();
         getAttendees(locationID);
       });
+  };
+
+  const filterData = (query) => {
+    const lowerCaseQuery = query.toLowerCase();
+    const results = attendees.filter((attendee) =>
+      attendee.name.toLowerCase().includes(lowerCaseQuery)
+    );
+    console.log(results);
+    setFilteredData(results);
+    // console.log(results);
   };
   // function replaceSpecialCharacter(inputString) {
   //   const replacedString = inputString.replace(/�/g, "Ñ");
@@ -188,21 +200,23 @@ const RegisterTable = () => {
             <div className="stat-value text-info">{confirmS}</div>
             {/* <div className="stat-desc">21% more than last month</div> */}
           </div>
-       {location===1&&   <div className="stat">
-            <div className="stat-figure text-warning">
-              <svg
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                height="2em"
-                width="2em"
-              >
-                <path d="M12 3h2l4 7h1a1 1 0 011 1 1 1 0 01-1 1h-1v6a1 1 0 01-1 1h-1a1 1 0 01-1-1v-1H5v1a1 1 0 01-1 1H3a1 1 0 01-1-1v-6H1a1 1 0 01-1-1 1 1 0 011-1h1l4-7h2V1h4v2zm3.86 7L13 5H7l-2.86 5h11.72zM5.5 15a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm9 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
-              </svg>
+          {location === 1 && (
+            <div className="stat">
+              <div className="stat-figure text-warning">
+                <svg
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  height="2em"
+                  width="2em"
+                >
+                  <path d="M12 3h2l4 7h1a1 1 0 011 1 1 1 0 01-1 1h-1v6a1 1 0 01-1 1h-1a1 1 0 01-1-1v-1H5v1a1 1 0 01-1 1H3a1 1 0 01-1-1v-6H1a1 1 0 01-1-1 1 1 0 011-1h1l4-7h2V1h4v2zm3.86 7L13 5H7l-2.86 5h11.72zM5.5 15a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm9 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                </svg>
+              </div>
+              <div className="stat-title text-gray-100">Taxis</div>
+              <div className="stat-value text-warning">{taxis}</div>
+              <div className="stat-desc text-white">{peopleTaxi} personas</div>
             </div>
-            <div className="stat-title text-gray-100">Taxis</div>
-            <div className="stat-value text-warning">{taxis}</div>
-            <div className="stat-desc text-white">{peopleTaxi} personas</div>
-          </div>}
+          )}
           {/* <div className="stat">
             <div className="stat-figure text-error">
               <svg
@@ -218,6 +232,50 @@ const RegisterTable = () => {
             <div className="stat-value text-error">{pendingS}</div>
             <div className="stat-desc">21% more than last month</div>
           </div> */}
+        </div>
+        <div className="max-w-lg mt-5">
+          <form className="">
+            <label
+              htmlFor="default-search"
+              className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+            >
+              Search
+            </label>
+            <div class="relative">
+              <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg
+                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="search"
+                id="default-search"
+                className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Ingresa un nombre..."
+                required
+                // value={querys}
+                onChange={(e) => filterData(e.target.value)}
+              />
+              {/* <button
+                type="submit"
+                className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Limpiar
+              </button> */}
+            </div>
+          </form>
         </div>
         <div>
           <div className="flex gap-5 m-2 justify-end">
@@ -276,7 +334,7 @@ const RegisterTable = () => {
               </tr>
             </thead>
             <tbody>
-              {attendees.map((colab, i) => (
+              {filteredData.map((colab, i) => (
                 <tr key={i}>
                   <td>{colab.name}</td>
                   <td className="">

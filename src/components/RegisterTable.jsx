@@ -233,7 +233,7 @@ const RegisterTable = () => {
             <div className="stat-desc">21% more than last month</div>
           </div> */}
         </div>
-        <div className="max-w-lg mt-5">
+        <div className="w-72 mt-5">
           <form className="">
             <label
               htmlFor="default-search"

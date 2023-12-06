@@ -30,7 +30,7 @@ const MainContent = () => {
         </div>
         <InvText />
         {location !== 3 && <Sec3 />}
-        <Form />
+        {location !== 2 && <Form />}
         <Snowfall
           // images={images}npm
           color="#f6f8fbfc"

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Modal from "./Modal";
 import Exportcsv from "./Exportcsv";
 import ModalAdd from "./ModalAdd";
+import ModalEdit from "./ModalEdit";
 import { useToggleList } from "../myHooks/ListToogle";
 import toast from "react-hot-toast";
 import useStore from "../Context";
@@ -21,6 +22,7 @@ const RegisterTable = () => {
   const [attendingS, setAttendingS] = useState(0);
   const { list, toggleList } = useToggleList();
   const [locationID, setLocationID] = useState(0);
+  const [rowSelected, setRowSelected] = useState({});
   const getAttendees = (location = 0) => {
     let attending = 0,
       pending = 0,
@@ -36,7 +38,7 @@ const RegisterTable = () => {
         setAttendees(sortedColabs);
         setFilteredData(sortedColabs);
         res.data.colabs.forEach((item) => {
-          console.log(item.taxi);
+          // console.log(item.taxi);
           item.taxi && cabs++;
           if (item.asistencia === 0) {
             pending += 1;
@@ -118,6 +120,7 @@ const RegisterTable = () => {
     <div className="">
       <Modal />
       <ModalAdd getData={getAttendees} />
+      <ModalEdit info={rowSelected} />
       {/* Open the modal using document.getElementById('ID').showModal() method */}
       <div id="">
         <dialog id="my_modal_4" className="modal">
@@ -241,8 +244,8 @@ const RegisterTable = () => {
             >
               Search
             </label>
-            <div class="relative">
-              <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <div className="relative">
+              <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg
                   className="w-4 h-4 text-gray-500 dark:text-gray-400"
                   aria-hidden="true"
@@ -399,7 +402,7 @@ const RegisterTable = () => {
                     </td>
                   )}
                   <td>{colab.phone}</td>
-                  <th>
+                  <th className="flex items-center">
                     <div
                       onClick={() => toggleList(colab.id)}
                       className="form-control"
@@ -412,6 +415,23 @@ const RegisterTable = () => {
                           className="checkbox checkbox-error"
                         />
                       </label>
+                    </div>
+                    <div
+                      onClick={() => {
+                        setRowSelected(colab);
+                        document.getElementById("my_modal_10").showModal();
+                      }}
+                      className="btn btn-sm btn-circle btn-secondary"
+                    >
+                      <svg
+                        className="text-yellow-500"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                        height="1em"
+                        width="1em"
+                      >
+                        <path d="M12.854.146a.5.5 0 00-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 000-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 01.5.5v.5h.5a.5.5 0 01.5.5v.5h.5a.5.5 0 01.5.5v.5h.5a.5.5 0 01.5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 016 13.5V13h-.5a.5.5 0 01-.5-.5V12h-.5a.5.5 0 01-.5-.5V11h-.5a.5.5 0 01-.5-.5V10h-.5a.499.499 0 01-.175-.032l-.179.178a.5.5 0 00-.11.168l-2 5a.5.5 0 00.65.65l5-2a.5.5 0 00.168-.11l.178-.178z" />
+                      </svg>
                     </div>
                   </th>
                 </tr>

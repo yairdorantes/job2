@@ -28,6 +28,8 @@ const ModalAdd = ({ getData }) => {
       asistencia: parseInt(data.asistencia),
     };
     // console.log(newEmployee);
+    document.getElementById("my_modal_1").close();
+
     axios
       .post(`${api}/panel`, newEmployee)
       .then((res) => {
@@ -46,7 +48,6 @@ const ModalAdd = ({ getData }) => {
         }
       })
       .finally(() => {
-        document.getElementById("my_modal_1").close();
         getData(location);
       });
   };

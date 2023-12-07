@@ -99,6 +99,31 @@ class HandleAdminActions(View):
         else:
             return HttpResponse("forbiden", status=403)
 
+    def put(self, request, id_employee=0):
+        jd = json.loads(request.body)
+        qr = jd["qr"]
+        wasa = jd["wasa"]
+        phone = jd.get("phone", 0)
+        employee = Colaborators.objects.filter(id=id_employee).first()
+        if employee:
+            employee.name = jd["name"]
+            employee.asistencia = jd["asistencia"]
+            employee.phone = phone
+            employee.taxi = jd["taxi"]
+            employee.ticket = qr
+            employee.save()
+            if wasa == True:
+                whats_res = sendWats(qr, phone)
+                if whats_res == 200:
+                    return HttpResponse("ok", status=200)
+                else:
+                    WhatsDetails.objects.create(phone=phone, ticket=qr)
+                    return HttpResponse("oki", status=200)
+            return HttpResponse("OK", status=200)
+
+        else:
+            return HttpResponse("not found", status=404)
+
 
 class ColaboratorsView(View):
     def get(self, request, location=0):

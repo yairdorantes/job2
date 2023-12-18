@@ -30,7 +30,7 @@ const InvText = () => {
         location:
           "22 de diciembre de 2023 a las 15:00 hrs. en el salón “Jardín Buenavista”, ubicado en Buenavista, San Mateo Atenco.",
         confirmation:
-          "Confirma tu asistencia antes del 11 de diciembre de 2023.",
+          "Confirma tu asistencia antes del 21 de diciembre de 2023.",
       });
     } else if (location === 2) {
       setBodyText({
